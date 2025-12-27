@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Schoonmaak Park - Industriële Reiniging</title>
 
-  <!-- Open Graph tags voor WhatsApp/Facebook preview – nu met raw GitHub URL -->
+  <!-- Open Graph tags voor WhatsApp/Facebook preview -->
   <meta property="og:title" content="Schoonmaak Park - Industriële Reiniging" />
   <meta property="og:description" content="Professionele industriële reiniging: schoon, veilig & duurzaam. VCA-gecertificeerd. Offerte aanvragen!" />
   <meta property="og:image" content="https://raw.githubusercontent.com/Professionele/Schoonmaak-park/main/SchoonmaakPark.jpg" />
@@ -60,7 +60,6 @@
       position: relative;
       overflow-x: hidden;
     }
-    /* Rustig zwevende bouncende ballen */
     .decor-balls {
       position: fixed;
       inset: 0;
@@ -83,7 +82,6 @@
       background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0.4));
       box-shadow: 0 0 40px rgba(255,255,255,0.6);
     }
-    /* Sterke glow op titels + contactinfo in dark mode */
     [data-theme="dark"] h2,
     [data-theme="dark"] .contact-title,
     [data-theme="dark"] .contact-info {
@@ -328,7 +326,7 @@
 </head>
 <body>
 
-  <!-- Rustig zwevende bouncende ballen (15 kleine) -->
+  <!-- Rustig zwevende bouncende ballen -->
   <div class="decor-balls">
     <div class="bubble" style="width: 120px; height: 120px;"></div>
     <div class="bubble" style="width: 100px; height: 100px;"></div>
@@ -403,6 +401,18 @@
     </section>
 
     <section class="section">
+      <h2>Auto-ramen wassen</h2>
+      <p>Bij Schoonmaak Park ben ik gespecialiseerd in het professioneel wassen van autoruiten. Ik zorg ervoor dat uw autoramen 100% streeploos, glanzend en kristalhelder zijn – zowel aan de binnen- als aan de buitenkant. Geen vlekken, geen strepen, alleen perfect zicht.</p>
+      <ul>
+        <li>Volledig streeploos resultaat</li>
+        <li>Speciale middelen voor glas en spiegels</li>
+        <li>Snel en efficiënt</li>
+        <li>Ideaal voor particulieren en showrooms</li>
+      </ul>
+      <p style="text-align:center; margin-top:2rem;">Alleen autoruiten – niets anders. Vraag nu een offerte!</p>
+    </section>
+
+    <section class="section">
       <h2>Onze aanpak</h2>
       <p>Via frequente opleidingen en een nauwgezette opvolging ben ik steeds op de hoogte van de nieuwste technieken. Na een grondige kennismaking met uw bedrijf bied ik een oplossing op maat.</p>
     </section>
@@ -420,10 +430,8 @@
     <section class="section" id="contact">
       <h2 class="contact-title">Contacteer mij</h2>
       <div style="text-align:center; margin:2rem 0;">
-        <a href="tel:+32469326331" class="contact-info" style="font-size:1.4rem; text-decoration:none;">📞 Bel: +32 469 23 63 31</a><br><br>
         <a href="mailto:info@schoonmaakpark.be" class="contact-info" style="font-size:1.4rem; text-decoration:none;">✉️ info@schoonmaakpark.be</a>
       </div>
-      <a href="https://wa.me/+32469326331?text=Hallo%2C%20ik%20wil%20een%20offerte%20voor%20industri%C3%ABle%20reiniging" class="btn">WhatsApp mij nu</a>
 
       <form action="https://formspree.io/f/xjgvbkan" method="POST">
         <input type="text" name="naam" placeholder="Je naam *" required>
@@ -441,60 +449,7 @@
   </footer>
 
   <script>
-    // Rustig zwevende bouncende ballen
-    const bubbles = document.querySelectorAll('.bubble');
-    const bubbleArray = Array.from(bubbles).map(bubble => ({
-      el: bubble,
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
-      vx: (Math.random() - 0.5) * 0.6,
-      vy: (Math.random() - 0.5) * 0.6,
-      radius: parseFloat(bubble.style.width) / 2
-    }));
-
-    function updateBubbles() {
-      bubbleArray.forEach((bubble, i) => {
-        bubble.x += bubble.vx;
-        bubble.y += bubble.vy;
-
-        if (bubble.x < 0 || bubble.x > window.innerWidth - bubble.radius * 2) {
-          bubble.vx *= -0.85;
-          bubble.x = Math.max(0, Math.min(bubble.x, window.innerWidth - bubble.radius * 2));
-        }
-        if (bubble.y < 0 || bubble.y > window.innerHeight - bubble.radius * 2) {
-          bubble.vy *= -0.85;
-          bubble.y = Math.max(0, Math.min(bubble.y, window.innerHeight - bubble.radius * 2));
-        }
-
-        bubbleArray.forEach((other, j) => {
-          if (i !== j) {
-            const dx = bubble.x - other.x;
-            const dy = bubble.y - other.y;
-            const distance = Math.sqrt(dx*dx + dy*dy);
-            if (distance < bubble.radius + other.radius) {
-              const angle = Math.atan2(dy, dx);
-              const impulse = 0.4;
-              bubble.vx = Math.cos(angle) * impulse;
-              bubble.vy = Math.sin(angle) * impulse;
-              other.vx = -Math.cos(angle) * impulse;
-              other.vy = -Math.sin(angle) * impulse;
-            }
-          }
-        });
-
-        bubble.el.style.left = `${bubble.x}px`;
-        bubble.el.style.top = `${bubble.y}px`;
-      });
-
-      requestAnimationFrame(updateBubbles);
-    }
-    updateBubbles();
-
-    if (window.location.hash) {
-      history.replaceState(null, null, window.location.pathname);
-      window.scrollTo(0, 0);
-    }
-
+    // Hamburger menu
     const hamburger = document.querySelector('.hamburger');
     const nav = document.getElementById('navMenu');
     const overlay = document.getElementById('overlay');
@@ -508,18 +463,7 @@
     hamburger.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', toggleMenu);
 
-    window.addEventListener('scroll', () => {
-      if (nav.classList.contains('active')) {
-        if (window.scrollY > 200) {
-          nav.style.opacity = '0';
-          nav.style.transform = 'translateY(-60px) scale(0.85)';
-        } else {
-          nav.style.opacity = '1';
-          nav.style.transform = 'translateY(0) scale(1)';
-        }
-      }
-    });
-
+    // Smooth scroll
     function scrollToSection(id) {
       const element = document.querySelector(id);
       if (element) {
@@ -551,6 +495,40 @@
       }
     }
 
+    // Ballen animatie
+    const bubbles = document.querySelectorAll('.bubble');
+    const bubbleArray = Array.from(bubbles).map(bubble => ({
+      el: bubble,
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      vx: (Math.random() - 0.5) * 0.6,
+      vy: (Math.random() - 0.5) * 0.6,
+      radius: parseFloat(bubble.style.width) / 2
+    }));
+
+    function updateBubbles() {
+      bubbleArray.forEach((bubble, i) => {
+        bubble.x += bubble.vx;
+        bubble.y += bubble.vy;
+
+        if (bubble.x < 0 || bubble.x > window.innerWidth - bubble.radius * 2) {
+          bubble.vx *= -0.85;
+          bubble.x = Math.max(0, Math.min(bubble.x, window.innerWidth - bubble.radius * 2));
+        }
+        if (bubble.y < 0 || bubble.y > window.innerHeight - bubble.radius * 2) {
+          bubble.vy *= -0.85;
+          bubble.y = Math.max(0, Math.min(bubble.y, window.innerHeight - bubble.radius * 2));
+        }
+
+        bubble.el.style.left = `${bubble.x}px`;
+        bubble.el.style.top = `${bubble.y}px`;
+      });
+
+      requestAnimationFrame(updateBubbles);
+    }
+    updateBubbles();
+
+    // Secties fade-in
     const sections = document.querySelectorAll('.section');
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -562,6 +540,7 @@
 
     sections.forEach(section => observer.observe(section));
 
+    // Theme toggle
     function toggleTheme() {
       const body = document.body;
       const currentTheme = body.getAttribute('data-theme') || 'light';
@@ -569,10 +548,11 @@
       body.setAttribute('data-theme', newTheme);
     }
 
+    // Reset hash on load
     window.addEventListener('load', () => {
       window.scrollTo(0, 0);
     });
   </script>
 
 </body>
-          </html>
+</html>
