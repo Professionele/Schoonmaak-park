@@ -40,49 +40,50 @@
       color: var(--text-dark);
       line-height: 1.6;
       min-height: 100vh;
-      background: linear-gradient(to bottom, var(--bg-start), var(--bg-end));
-      overflow-x: hidden;
+      background: black;
+      background-image: radial-gradient(circle at center, white 0%, #222 10%, black 60%);
+      overflow: hidden;
       position: relative;
       transition: background 0.5s ease, color 0.5s ease;
     }
-    /* Fijne sneeuw animatie */
-    .snowflakes {
+    /* Magische driehoeken achtergrond */
+    .tri-wrap {
       position: fixed;
       inset: 0;
+      transform-style: preserve-3d;
+      perspective: 800px;
       pointer-events: none;
       z-index: -1;
-      overflow: hidden;
     }
-    .snowflake {
+    .tri {
       position: absolute;
-      width: 8px;
-      height: 8px;
-      background: white;
-      border-radius: 50%;
-      opacity: 0.8;
-      box-shadow: 0 0 10px rgba(255,255,255,0.8);
-      animation: fall linear infinite, sway 6s infinite ease-in-out;
-      will-change: transform;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0;
+      opacity: 0;
+      transform: translate(-50%, -50%) rotate(0deg) translate3d(0,0,-1500px) scale(0);
     }
-    @keyframes fall {
-      0% { transform: translateY(-100vh); }
-      100% { transform: translateY(100vh); }
+    @keyframes anim {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) rotate(var(--rotate)) translate3d(var(--x), var(--y), 1000px) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(calc(var(--rotate) * 1.5)) translate3d(calc(var(--x) * 2), calc(var(--y) * 2), -1500px) scale(0.5);
+      }
     }
-    @keyframes sway {
-      0%, 100% { transform: translateX(0); }
-      50% { transform: translateX(20px); }
-    }
-    /* Verschillende sneeuwvlokken */
-    .snowflake:nth-child(1) { left: 10%; animation-duration: 20s; animation-delay: 0s; }
-    .snowflake:nth-child(2) { left: 20%; animation-duration: 25s; animation-delay: 2s; width: 6px; height: 6px; }
-    .snowflake:nth-child(3) { left: 30%; animation-duration: 18s; animation-delay: 4s; }
-    .snowflake:nth-child(4) { left: 40%; animation-duration: 22s; animation-delay: 6s; width: 10px; height: 10px; }
-    .snowflake:nth-child(5) { left: 50%; animation-duration: 19s; animation-delay: 8s; }
-    .snowflake:nth-child(6) { left: 60%; animation-duration: 24s; animation-delay: 10s; width: 7px; height: 7px; }
-    .snowflake:nth-child(7) { left: 70%; animation-duration: 21s; animation-delay: 12s; }
-    .snowflake:nth-child(8) { left: 80%; animation-duration: 23s; animation-delay: 14s; }
-    .snowflake:nth-child(9) { left: 90%; animation-duration: 20s; animation-delay: 16s; width: 9px; height: 9px; }
-    .snowflake:nth-child(10) { left: 15%; animation-duration: 26s; animation-delay: 18s; }
+    /* 200 triangles met random kleuren, grootte en richting */
+    .tri:nth-child(1)  { --size: 20px; --rotate: 45deg; --x: 300px; --y: -200px; animation: anim 12s infinite linear; animation-delay: 0s; border-top: 20px solid hsl(0, 100%, 50%); }
+    .tri:nth-child(2)  { --size: 18px; --rotate: 120deg; --x: -400px; --y: 150px; animation-delay: 0.5s; border-top: 18px solid hsl(30, 100%, 50%); }
+    .tri:nth-child(3)  { --size: 22px; --rotate: 200deg; --x: 500px; --y: 300px; animation-delay: 1s; border-top: 22px solid hsl(60, 100%, 50%); }
+    .tri:nth-child(4)  { --size: 15px; --rotate: 300deg; --x: -600px; --y: -250px; animation-delay: 1.5s; border-top: 15px solid hsl(90, 100%, 50%); }
+    .tri:nth-child(5)  { --size: 25px; --rotate: 50deg; --x: 200px; --y: 400px; animation-delay: 2s; border-top: 25px solid hsl(120, 100%, 50%); }
+    /* ... (ik maak er 200, maar hier kort voor overzicht) */
+    /* In echte code: 200x random HSL kleuren en posities */
     header {
       position: relative;
       background: linear-gradient(to bottom, var(--primary-light), transparent);
@@ -318,18 +319,14 @@
 </head>
 <body>
 
-  <!-- Fijne sneeuwvlokken -->
-  <div class="snowflakes">
-    <div class="snowflake"></div>
-    <div class="snowflake"></div>
-    <div class="snowflake"></div>
-    <div class="snowflake"></div>
-    <div class="snowflake"></div>
-    <div class="snowflake"></div>
-    <div class="snowflake"></div>
-    <div class="snowflake"></div>
-    <div class="snowflake"></div>
-    <div class="snowflake"></div>
+  <!-- Magische driehoeken achtergrond -->
+  <div class="tri-wrap">
+    <div class="tri"></div>
+    <div class="tri"></div>
+    <div class="tri"></div>
+    <div class="tri"></div>
+    <div class="tri"></div>
+    <!-- Herhaal dit 200 keer met random waarden (ik maak er hier 5 voor voorbeeld, maar gebruik JS voor 200) -->
   </div>
 
   <header>
@@ -426,6 +423,29 @@
   </footer>
 
   <script>
+    // Dynamisch 200 triangles toevoegen met random waarden
+    const triWrap = document.querySelector('.tri-wrap');
+    const total = 200;
+    const time = 10; // animatieduur in seconden
+
+    for (let i = 1; i <= total; i++) {
+      const tri = document.createElement('div');
+      tri.classList.add('tri');
+      const size = Math.random() * 50 + 10; // 10-60px
+      const rotate = Math.random() * 360;
+      const x = (Math.random() - 0.5) * 2000;
+      const y = (Math.random() - 0.5) * 2000;
+      const hue = Math.random() * 360;
+      tri.style.setProperty('--size', `${size}px`);
+      tri.style.setProperty('--rotate', `${rotate}deg`);
+      tri.style.setProperty('--x', `${x}px`);
+      tri.style.setProperty('--y', `${y}px`);
+      tri.style.borderTop = `\( {size}px solid hsl( \){hue}, 100%, 50%)`;
+      tri.style.animation = `anim ${time}s infinite linear`;
+      tri.style.animationDelay = `${i * -(time / total)}s`;
+      triWrap.appendChild(tri);
+    }
+
     // Voorkom auto-scroll bij laden
     if (window.location.hash) {
       history.replaceState(null, null, window.location.pathname);
