@@ -15,7 +15,7 @@
       --text-light: #ffffff;
       --bg-start: #e3f2fd;
       --bg-end: #ffffff;
-      --glass-top: rgba(81, 212, 250, 0.55); /* Sterker glossy */
+      --glass-top: rgba(81, 212, 250, 0.55);
       --glass-bottom: rgba(255, 255, 255, 0.45);
       --glass-border: rgba(81, 212, 250, 0.4);
       --shadow: 0 12px 40px rgba(2, 136, 209, 0.25);
@@ -41,7 +41,40 @@
       line-height: 1.6;
       min-height: 100vh;
       background: linear-gradient(to bottom, var(--bg-start), var(--bg-end));
+      overflow-x: hidden;
+      position: relative;
       transition: background 0.5s ease, color 0.5s ease;
+    }
+    /* Moderne decor ballen met animatie */
+    .decor-balls {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .ball {
+      position: absolute;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.6), rgba(81,212,250,0.4));
+      border-radius: 50%;
+      box-shadow: 0 0 40px rgba(81,212,250,0.5), inset 0 0 20px rgba(255,255,255,0.6);
+      backdrop-filter: blur(10px);
+      animation: float 25s infinite ease-in-out, pulse 6s infinite ease-in-out;
+    }
+    .ball:nth-child(1) { width: 300px; height: 300px; top: 10%; left: 5%; animation-delay: 0s; }
+    .ball:nth-child(2) { width: 250px; height: 250px; top: 40%; right: 10%; animation-delay: 5s; }
+    .ball:nth-child(3) { width: 350px; height: 350px; bottom: 15%; left: 20%; animation-delay: 10s; }
+    .ball:nth-child(4) { width: 200px; height: 200px; bottom: 30%; right: 15%; animation-delay: 15s; }
+    .ball:nth-child(5) { width: 280px; height: 280px; top: 60%; left: 50%; animation-delay: 20s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) translateX(0); }
+      25% { transform: translateY(-40px) translateX(30px); }
+      50% { transform: translateY(-80px) translateX(-30px); }
+      75% { transform: translateY(-30px) translateX(40px); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.7; transform: scale(1); }
+      50% { opacity: 0.9; transform: scale(1.05); }
     }
     header {
       position: relative;
@@ -61,7 +94,7 @@
       justify-content: space-between;
       align-items: center;
       background: linear-gradient(135deg, var(--glass-top), var(--glass-bottom));
-      backdrop-filter: blur(20px); /* Sterkere blur voor glossy */
+      backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-radius: 16px;
       border: 1px solid var(--glass-border);
@@ -172,7 +205,7 @@
     }
     .section {
       background: linear-gradient(135deg, var(--glass-top), var(--glass-bottom));
-      backdrop-filter: blur(20px); /* Volledig glossy glass-effect */
+      backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-radius: 24px;
       padding: 3rem 2rem;
@@ -278,7 +311,9 @@
 </head>
 <body>
 
-  <div class="background-balls">
+  <!-- Moderne decor ballen op de achtergrond -->
+  <div class="decor-balls">
+    <div class="ball"></div>
     <div class="ball"></div>
     <div class="ball"></div>
     <div class="ball"></div>
