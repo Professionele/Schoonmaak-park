@@ -3,27 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Schoonmaak Park - Industriële Reiniging & Glasbewassing</title>
+  <title>Schoonmaak Park - Industriële Reiniging</title>
 
-  <!-- Open Graph tags voor WhatsApp/Facebook preview -->
-  <meta property="og:title" content="Schoonmaak Park - Industriële Reiniging & Glasbewassing" />
-  <meta property="og:description" content="Professionele industriële reiniging, glasbewassing op hoogte, auto-interieurs en bootreiniging: schoon, veilig & duurzaam. VCA-gecertificeerd." />
+  <!-- Open Graph tags voor WhatsApp/Facebook preview – nu met raw GitHub URL -->
+  <meta property="og:title" content="Schoonmaak Park - Industriële Reiniging" />
+  <meta property="og:description" content="Professionele industriële reiniging: schoon, veilig & duurzaam. VCA-gecertificeerd. Offerte aanvragen!" />
   <meta property="og:image" content="https://raw.githubusercontent.com/Professionele/Schoonmaak-park/main/SchoonmaakPark.jpg" />
   <meta property="og:url" content="https://professionionele.github.io/Schoonmaak-park/" />
   <meta property="og:type" content="website" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Schoonmaak Park Logo" />
 
   <!-- Twitter/X cards -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Schoonmaak Park - Industriële Reiniging & Glasbewassing" />
-  <meta name="twitter:description" content="Professionele industriële reiniging, glasbewassing op hoogte, auto-interieurs en bootreiniging: schoon, veilig & duurzaam. VCA-gecertificeerd." />
+  <meta name="twitter:title" content="Schoonmaak Park - Industriële Reiniging" />
+  <meta name="twitter:description" content="Professionele industriële reiniging: schoon, veilig & duurzaam. VCA-gecertificeerd." />
   <meta name="twitter:image" content="https://raw.githubusercontent.com/Professionele/Schoonmaak-park/main/SchoonmaakPark.jpg" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
   <style>
     :root {
       --primary: #0288d1;
@@ -60,6 +60,7 @@
       position: relative;
       overflow-x: hidden;
     }
+    /* Rustig zwevende bouncende ballen */
     .decor-balls {
       position: fixed;
       inset: 0;
@@ -82,20 +83,7 @@
       background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0.4));
       box-shadow: 0 0 40px rgba(255,255,255,0.6);
     }
-    .cleaning-car {
-      position: absolute;
-      width: 180px;
-      height: auto;
-      opacity: 0.9;
-      filter: drop-shadow(0 0 20px var(--primary-light));
-      animation: float-car 60s infinite ease-in-out;
-    }
-    @keyframes float-car {
-      0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
-      25% { transform: translateX(20vw) translateY(-10px) rotate(2deg); }
-      50% { transform: translateX(40vw) translateY(5px) rotate(-1deg); }
-      75% { transform: translateX(60vw) translateY(-15px) rotate(1deg); }
-    }
+    /* Sterke glow op titels + contactinfo in dark mode */
     [data-theme="dark"] h2,
     [data-theme="dark"] .contact-title,
     [data-theme="dark"] .contact-info {
@@ -111,170 +99,237 @@
       overflow: hidden;
       z-index: 1;
     }
-    .logo {
-      font-size: 3.5rem;
-      font-weight: 700;
-      letter-spacing: -1px;
-      margin-bottom: 1rem;
-    }
-    .logo span {
-      color: #ffffff;
-    }
-    .tagline {
-      font-size: 1.4rem;
-      margin-bottom: 2rem;
-    }
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(10px);
-      z-index: 1000;
-      transition: background 0.3s ease;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    [data-theme="dark"] nav {
-      background: rgba(0, 43, 77, 0.9);
-    }
-    .nav-container {
+    .header-bar {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      right: 1rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 2rem;
-      max-width: 1400px;
-      margin: 0 auto;
+      background: linear-gradient(135deg, var(--glass-top), var(--glass-bottom));
+      backdrop-filter: blur(20px);
+      border-radius: 16px;
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow);
+      padding: 0.8rem 1.2rem;
+      z-index: 1001;
+    }
+    .logo-container {
+      width: 180px;
+      height: auto;
+    }
+    .logo-container img {
+      width: 100%;
+      height: auto;
+      display: block;
     }
     .hamburger {
-      display: none;
+      width: 40px;
+      height: 30px;
       cursor: pointer;
-      flex-direction: column;
-      gap: 5px;
+      position: relative;
     }
     .hamburger span {
-      width: 30px;
-      height: 3px;
-      background: var(--text-dark);
-      transition: all 0.3s;
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--text-light);
+      border-radius: 2px;
+      transition: all 0.3s ease;
     }
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
+    .hamburger span:nth-child(1) { top: 0; }
+    .hamburger span:nth-child(2) { top: 13px; }
+    .hamburger span:nth-child(3) { top: 26px; }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+    .nav {
+      display: none;
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      width: 180px;
+      background: linear-gradient(135deg, var(--glass-top), var(--glass-bottom));
+      backdrop-filter: blur(20px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 30px rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      transform: translateY(-40px) scale(0.9);
+      opacity: 0;
+      transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
+      z-index: 99999;
+      padding: 1rem 0;
+      overflow: hidden;
     }
-    .nav-links a {
+    .nav.active {
+      display: block;
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+    .nav a {
+      display: block;
       color: var(--text-dark);
       text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s;
-    }
-    .nav-links a:hover {
-      color: var(--primary);
-    }
-    .theme-toggle {
-      background: none;
-      border: none;
-      font-size: 1.5rem;
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.3s ease;
       cursor: pointer;
+    }
+    .nav a:hover {
+      background: rgba(255,255,255,0.2);
+      color: var(--primary-light);
+      padding-left: 2rem;
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease;
+      z-index: 99998;
+    }
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .header-content {
+      margin-top: 6rem;
+    }
+    .tagline {
+      font-size: 1.8rem;
+      max-width: 800px;
+      margin: 0 auto;
+      color: var(--text-light);
+      font-weight: 500;
+      letter-spacing: 0.5px;
     }
     main {
-      padding-top: 120px;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
       padding: 0 1.5rem;
+      margin-top: -6rem;
+      position: relative;
+      z-index: 2;
+    }
+    .section {
+      background: linear-gradient(135deg, var(--glass-top), var(--glass-bottom));
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      padding: 3rem 2rem;
+      margin: 2.5rem 0;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--glass-border);
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     h2 {
-      text-align: center;
-      font-size: 2.8rem;
-      margin: 4rem 0 2rem;
       color: var(--primary);
-    }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
-    }
-    .service-card {
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      padding: 2rem;
-      box-shadow: var(--shadow);
-      transition: transform 0.3s;
       text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 2.2rem;
     }
-    [data-theme="dark"] .service-card {
-      background: rgba(0, 43, 77, 0.7);
-    }
-    .service-card:hover {
-      transform: translateY(-10px);
-    }
-    .service-card h3 {
-      color: var(--primary);
-      margin-bottom: 1rem;
-    }
-    form {
-      max-width: 600px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-    input, textarea {
-      padding: 1rem;
-      border: 2px solid var(--primary);
-      border-radius: 10px;
-      font-size: 1rem;
-    }
-    button {
-      padding: 1rem;
+    ul { list-style: none; }
+    ul li { margin: 1rem 0; padding-left: 2.5rem; position: relative; font-size: 1.1rem; }
+    ul li::before { content: "✔"; color: var(--primary); position: absolute; left: 0; font-size: 1.5rem; top: -2px; }
+    .btn {
+      display: block;
       background: var(--primary);
       color: white;
-      border: none;
-      border-radius: 10px;
+      padding: 1.2rem;
+      border-radius: 50px;
+      text-align: center;
       font-size: 1.2rem;
-      cursor: pointer;
-      transition: background 0.3s;
+      font-weight: 600;
+      text-decoration: none;
+      margin: 2rem auto;
+      max-width: 300px;
+      transition: all 0.4s;
     }
-    button:hover {
-      background: var(--primary-light);
+    .btn:hover { background: var(--primary-light); transform: translateY(-4px); box-shadow: 0 12px 30px rgba(2,136,209,0.3); }
+    form { display: flex; flex-direction: column; gap: 1.5rem; }
+    input, textarea {
+      padding: 1.2rem;
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(79,195,247,0.2);
+      font-size: 1rem;
+      color: var(--text-dark);
+      transition: all 0.3s ease;
+      outline: none;
+    }
+    input:focus, textarea:focus {
+      border-color: var(--primary-light);
+      box-shadow: 0 0 20px rgba(79,195,247,0.5);
+      transform: translateY(-2px);
     }
     footer {
-      background: var(--primary);
-      color: white;
       text-align: center;
-      padding: 3rem 1rem;
-      margin-top: 4rem;
+      padding: 4rem 1rem 2rem;
+      background: linear-gradient(to bottom, var(--primary-light), var(--primary));
+      color: white;
+      position: relative;
+      z-index: 1;
     }
-    @media (max-width: 768px) {
-      .hamburger { display: flex; }
-      .nav-links {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: rgba(255, 255, 255, 0.95);
-        flex-direction: column;
-        align-items: center;
-        padding: 2rem 0;
-        transform: translateY(-100%);
-        transition: transform 0.4s ease;
+    [data-theme="dark"] footer {
+      background: linear-gradient(to bottom, #001f3f, #000b1e);
+      box-shadow: inset 0 0 20px rgba(129, 212, 250, 0.3);
+    }
+    footer small {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      color: var(--text-light);
+      text-shadow: 0 0 8px rgba(129, 212, 250, 0.5);
+    }
+    @media (min-width: 768px) {
+      .hamburger { display: none; }
+      .nav {
+        display: flex;
+        flex-direction: row;
+        position: static;
+        background: transparent;
+        backdrop-filter: none;
+        box-shadow: none;
+        transform: none;
+        opacity: 1;
+        padding: 0;
+        width: auto;
       }
-      [data-theme="dark"] .nav-links {
-        background: rgba(0, 43, 77, 0.95);
+      .nav a {
+        padding: 0 1.5rem;
+        color: white;
       }
-      .nav-links.active {
-        transform: translateY(0);
+      .nav a:hover { color: var(--primary-light); }
+      .theme-switch { display: none; }
+      header { padding: 10rem 2rem 12rem; }
+      .header-bar {
+        top: 2rem;
+        left: 2rem;
+        right: 2rem;
+        padding: 1rem 1.5rem;
       }
+      .logo-container {
+        width: 280px;
+      }
+      .tagline { font-size: 2.2rem; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Rustig zwevende bouncende ballen (15 kleine) -->
   <div class="decor-balls">
-    <!-- Ballen -->
     <div class="bubble" style="width: 120px; height: 120px;"></div>
     <div class="bubble" style="width: 100px; height: 100px;"></div>
     <div class="bubble" style="width: 140px; height: 140px;"></div>
@@ -290,118 +345,103 @@
     <div class="bubble" style="width: 145px; height: 145px;"></div>
     <div class="bubble" style="width: 95px; height: 95px;"></div>
     <div class="bubble" style="width: 135px; height: 135px;"></div>
-
-    <!-- Glazenwassers-auto -->
-    <img class="cleaning-car" src="https://raw.githubusercontent.com/Professionele/Schoonmaak-park/main/glazenwasser-auto.png" alt="Glazenwassers auto" style="top: 40%; left: -200px;">
   </div>
 
-  <nav>
-    <div class="nav-container">
-      <div class="logo">Schoonmaak Park</div>
-      <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#diensten">Diensten</a></li>
-        <li><a href="#over">Over ons</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <button class="theme-toggle">🌙</button>
-      <div class="hamburger">
+  <header>
+    <div class="header-bar">
+      <div class="logo-container">
+        <img src="SchoonmaakPark.png" alt="Schoonmaak Park Logo">
+      </div>
+      <div class="hamburger" id="hamburger">
         <span></span>
         <span></span>
         <span></span>
       </div>
     </div>
-  </nav>
-
-  <header id="home">
-    <h1 class="logo"><span>Schoonmaak</span> Park</h1>
-    <p class="tagline">Professionele industriële reiniging & glasbewassing: schoon, veilig en duurzaam. VCA-gecertificeerd.</p>
+    <nav class="nav" id="navMenu">
+      <a href="#home" onclick="scrollToSection('#home')">Home</a>
+      <a href="#diensten" onclick="scrollToSection('#diensten')">Diensten</a>
+      <a href="#contact" onclick="scrollToSection('#contact')">Contact</a>
+      <div class="theme-switch">
+        <label>Dark Mode</label>
+        <label class="switch">
+          <input type="checkbox" id="themeCheckbox" onchange="toggleTheme()">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </nav>
+    <div class="overlay" id="overlay"></div>
+    <div class="header-content">
+      <p class="tagline">Professionele industriële reiniging – schoon, veilig & duurzaam</p>
+    </div>
+    <div class="header-fade"></div>
   </header>
 
   <main>
-    <section id="diensten">
-      <div class="container">
-        <h2>Onze Diensten</h2>
-        <div class="services-grid">
-          <div class="service-card">
-            <h3>Industriële Reiniging</h3>
-            <p>Hoogwerkerwerken, gevels, daken, zonnepanelen, machines en ventilatie. Schoon, veilig en duurzaam.</p>
-          </div>
-          <div class="service-card">
-            <h3>Glasbewassing Woningen & Gebouwen</h3>
-            <p>Professionele ramenwassing op hoogte voor huizen, appartementen, kantoren en bedrijfspanden. Altijd streeploos, veilig en met oog voor detail.</p>
-          </div>
-          <div class="service-card">
-            <h3>Auto-ramen & Interieur</h3>
-            <p>Volledige reiniging van autoruiten, spiegels en dashboard tot 100% glanzend en streeploos proper. Perfect voor particulieren, showrooms en fleetbeheer.</p>
-          </div>
-          <div class="service-card">
-            <h3>Bootreiniging</h3>
-            <p>Professionele reiniging van jachten, boten en schepen: exterieur (romp, dek, ramen), interieur (cabine, salon, keuken) en alle details. Tot in de puntjes schoon en glanzend.</p>
-          </div>
-        </div>
-      </div>
+    <section class="section" id="home">
+      <h2>Welkom bij Schoonmaak Park</h2>
+      <p>Industriële reiniging is werk voor specialisten. Schoonmaak Park zorgt ervoor dat uw medewerkers in een propere – en dus ook veiliger – omgeving aan de slag kunnen. Met meer dan 10 jaar ervaring ben ik uw betrouwbare partner voor industriële schoonmaak in heel België.</p>
+      <ul>
+        <li>Persoonlijke aanpak op maat</li>
+        <li>VCA-gecertificeerd</li>
+        <li>Altijd in uw buurt</li>
+        <li>Corona-proof methodes</li>
+      </ul>
     </section>
 
-    <section id="over">
-      <div class="container">
-        <h2>Onze Aanpak</h2>
-        <p style="text-align: center; max-width: 800px; margin: 0 auto;">
-          Met de nieuwste technieken en hoogwerker (tot 50m) bereiken we elk oppervlak veilig en efficiënt.  
-          Altijd met oog voor detail, milieuvriendelijke middelen en maximale klanttevredenheid.
-        </p>
-        <h2 style="margin-top: 3rem;">Certificering</h2>
-        <p style="text-align: center;">VCA-gecertificeerd – veiligheid en kwaliteit staan voorop.</p>
-      </div>
+    <section class="section" id="diensten">
+      <h2>Onze diensten</h2>
+      <p>Voor elke industriële reiniging de gepaste oplossing. Wij zoeken steeds naar de beste manier om kwaliteit te leveren.</p>
+      <ul>
+        <li>Hogedrukreiniging</li>
+        <li>Droogijsstralen</li>
+        <li>Ontvetting & dieptereiniging</li>
+        <li>Reiniging op hoogte</li>
+        <li>Ventilatie- en machine-reiniging</li>
+      </ul>
+      <p style="text-align:center; margin-top:2rem;">Vraag gerust een vrijblijvende offerte aan!</p>
     </section>
 
-    <section id="contact">
-      <div class="container">
-        <h2>Contacteer ons</h2>
-        <p style="text-align: center;">Vraag vrijblijvend een offerte aan voor uw project.</p>
-        <form action="https://formspree.io/f/xjgvbkan" method="POST">
-          <input type="text" name="naam" placeholder="Naam" required>
-          <input type="email" name="email" placeholder="E-mail" required>
-          <textarea name="bericht" rows="6" placeholder="Uw bericht (bijv. type pand/boot/auto, aantal ramen, etc.)" required></textarea>
-          <button type="submit">Offerte aanvragen</button>
-        </form>
+    <section class="section">
+      <h2>Onze aanpak</h2>
+      <p>Via frequente opleidingen en een nauwgezette opvolging ben ik steeds op de hoogte van de nieuwste technieken. Na een grondige kennismaking met uw bedrijf bied ik een oplossing op maat.</p>
+    </section>
+
+    <section class="section">
+      <h2>Certificering</h2>
+      <p>Schoonmaak Park is VCA-gecertificeerd. Dit betekent dat ik werk volgens de strengste normen voor veiligheid, gezondheid en milieu.</p>
+    </section>
+
+    <section class="section">
+      <h2>Corona-proof schoonmaken</h2>
+      <p>Sinds de uitbraak van Covid-19 heeft schoonmaak een extra dimensie gekregen. Ik zorg voor virusvrije en veilige ruimtes met extra aandacht voor contactpunten zoals schakelaars, hendels en klinken. Indien nodig plan ik een grondige desinfectie.</p>
+    </section>
+
+    <section class="section" id="contact">
+      <h2 class="contact-title">Contacteer mij</h2>
+      <div style="text-align:center; margin:2rem 0;">
+        <a href="tel:+32469326331" class="contact-info" style="font-size:1.4rem; text-decoration:none;">📞 Bel: +32 469 23 63 31</a><br><br>
+        <a href="mailto:info@schoonmaakpark.be" class="contact-info" style="font-size:1.4rem; text-decoration:none;">✉️ info@schoonmaakpark.be</a>
       </div>
+      <a href="https://wa.me/+32469326331?text=Hallo%2C%20ik%20wil%20een%20offerte%20voor%20industri%C3%ABle%20reiniging" class="btn">WhatsApp mij nu</a>
+
+      <form action="https://formspree.io/f/xjgvbkan" method="POST">
+        <input type="text" name="naam" placeholder="Je naam *" required>
+        <input type="tel" name="telefoon" placeholder="Telefoonnummer *" required>
+        <input type="email" name="email" placeholder="E-mailadres *" required>
+        <textarea name="bericht" rows="5" placeholder="Je vraag of bericht..." required></textarea>
+        <button type="submit" class="btn">Verstuur aanvraag</button>
+      </form>
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 Schoonmaak Park. Alle rechten voorbehouden. VCA-gecertificeerd.</p>
+    © 2025 Schoonmaak Park – Zelfstandig & betrouwbaar<br>
+    <small>VCA-gecertificeerd | Privacy | Algemene voorwaarden</small>
   </footer>
 
   <script>
-    // Hamburger menu
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-    });
-
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
-        if (navLinks.classList.contains('active')) {
-          navLinks.classList.remove('active');
-        }
-      });
-    });
-
-    // Theme toggle
-    const themeToggle = document.querySelector('.theme-toggle');
-    themeToggle.addEventListener('click', () => {
-      document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-      themeToggle.textContent = document.documentElement.dataset.theme === 'dark' ? '☀️' : '🌙';
-    });
-
-    // Ballen animatie
+    // Rustig zwevende bouncende ballen
     const bubbles = document.querySelectorAll('.bubble');
     const bubbleArray = Array.from(bubbles).map(bubble => ({
       el: bubble,
@@ -426,6 +466,22 @@
           bubble.y = Math.max(0, Math.min(bubble.y, window.innerHeight - bubble.radius * 2));
         }
 
+        bubbleArray.forEach((other, j) => {
+          if (i !== j) {
+            const dx = bubble.x - other.x;
+            const dy = bubble.y - other.y;
+            const distance = Math.sqrt(dx*dx + dy*dy);
+            if (distance < bubble.radius + other.radius) {
+              const angle = Math.atan2(dy, dx);
+              const impulse = 0.4;
+              bubble.vx = Math.cos(angle) * impulse;
+              bubble.vy = Math.sin(angle) * impulse;
+              other.vx = -Math.cos(angle) * impulse;
+              other.vy = -Math.sin(angle) * impulse;
+            }
+          }
+        });
+
         bubble.el.style.left = `${bubble.x}px`;
         bubble.el.style.top = `${bubble.y}px`;
       });
@@ -434,12 +490,89 @@
     }
     updateBubbles();
 
-    window.addEventListener('resize', () => {
-      bubbleArray.forEach(b => {
-        b.x = Math.random() * window.innerWidth;
-        b.y = Math.random() * window.innerHeight;
+    if (window.location.hash) {
+      history.replaceState(null, null, window.location.pathname);
+      window.scrollTo(0, 0);
+    }
+
+    const hamburger = document.querySelector('.hamburger');
+    const nav = document.getElementById('navMenu');
+    const overlay = document.getElementById('overlay');
+
+    function toggleMenu() {
+      hamburger.classList.toggle('active');
+      nav.classList.toggle('active');
+      overlay.classList.toggle('active');
+    }
+
+    hamburger.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
+
+    window.addEventListener('scroll', () => {
+      if (nav.classList.contains('active')) {
+        if (window.scrollY > 200) {
+          nav.style.opacity = '0';
+          nav.style.transform = 'translateY(-60px) scale(0.85)';
+        } else {
+          nav.style.opacity = '1';
+          nav.style.transform = 'translateY(0) scale(1)';
+        }
+      }
+    });
+
+    function scrollToSection(id) {
+      const element = document.querySelector(id);
+      if (element) {
+        const start = window.pageYOffset;
+        const target = element.getBoundingClientRect().top + start - 80;
+        const distance = target - start;
+        const duration = 1500;
+        let startTime = null;
+
+        function easeInOutQuad(t) {
+          return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+        }
+
+        function animation(currentTime) {
+          if (startTime === null) startTime = currentTime;
+          const timeElapsed = currentTime - startTime;
+          const progress = Math.min(timeElapsed / duration, 1);
+          const ease = easeInOutQuad(progress);
+          window.scrollTo(0, start + distance * ease);
+
+          if (timeElapsed < duration) requestAnimationFrame(animation);
+        }
+
+        requestAnimationFrame(animation);
+
+        if (nav.classList.contains('active')) {
+          toggleMenu();
+        }
+      }
+    }
+
+    const sections = document.querySelectorAll('.section');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
       });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => observer.observe(section));
+
+    function toggleTheme() {
+      const body = document.body;
+      const currentTheme = body.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      body.setAttribute('data-theme', newTheme);
+    }
+
+    window.addEventListener('load', () => {
+      window.scrollTo(0, 0);
     });
   </script>
+
 </body>
-</html>
+          </html>
