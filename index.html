@@ -43,28 +43,54 @@
       position: relative;
       overflow-x: hidden;
     }
-    /* Zwevende bouncende ballen */
-    .bubbles {
+    /* Zwevende kleine glossy ballen */
+    .decor-balls {
       position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: -1;
     }
-    .bubble {
+    .ball {
       position: absolute;
       border-radius: 50%;
-      box-shadow: 0 0 40px var(--primary-light);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      will-change: transform;
-      transition: transform 0.05s linear;
+      box-shadow: 0 0 30px var(--primary-light);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      animation: float 40s infinite ease-in-out, pulse 8s infinite ease-in-out;
     }
-    [data-theme="light"] .bubble {
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(79,195,247,0.6));
+    [data-theme="light"] .ball {
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.7), rgba(79,195,247,0.5));
     }
-    [data-theme="dark"] .bubble {
+    [data-theme="dark"] .ball {
       background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0.4));
-      box-shadow: 0 0 50px rgba(255,255,255,0.8);
+      box-shadow: 0 0 40px rgba(255,255,255,0.6);
+    }
+    /* 15 kleine ballen */
+    .ball:nth-child(1) { width: 140px; height: 140px; top: 5%; left: 8%; animation-delay: 0s; }
+    .ball:nth-child(2) { width: 120px; height: 120px; top: 20%; right: 12%; animation-delay: 3s; }
+    .ball:nth-child(3) { width: 160px; height: 160px; top: 35%; left: 15%; animation-delay: 6s; }
+    .ball:nth-child(4) { width: 100px; height: 100px; bottom: 10%; left: 25%; animation-delay: 9s; }
+    .ball:nth-child(5) { width: 130px; height: 130px; top: 50%; right: 18%; animation-delay: 12s; }
+    .ball:nth-child(6) { width: 110px; height: 110px; bottom: 25%; right: 20%; animation-delay: 15s; }
+    .ball:nth-child(7) { width: 150px; height: 150px; top: 65%; left: 30%; animation-delay: 18s; }
+    .ball:nth-child(8) { width: 90px; height: 90px; bottom: 40%; left: 35%; animation-delay: 21s; }
+    .ball:nth-child(9) { width: 170px; height: 170px; top: 15%; left: 40%; animation-delay: 24s; }
+    .ball:nth-child(10) { width: 125px; height: 125px; top: 80%; right: 25%; animation-delay: 27s; }
+    .ball:nth-child(11) { width: 135px; height: 135px; bottom: 5%; right: 30%; animation-delay: 30s; }
+    .ball:nth-child(12) { width: 105px; height: 105px; top: 45%; left: 55%; animation-delay: 33s; }
+    .ball:nth-child(13) { width: 145px; height: 145px; bottom: 55%; left: 60%; animation-delay: 36s; }
+    .ball:nth-child(14) { width: 115px; height: 115px; top: 25%; right: 45%; animation-delay: 39s; }
+    .ball:nth-child(15) { width: 155px; height: 155px; bottom: 70%; right: 50%; animation-delay: 42s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) translateX(0); }
+      25% { transform: translateY(-30px) translateX(25px); }
+      50% { transform: translateY(-60px) translateX(-25px); }
+      75% { transform: translateY(-20px) translateX(30px); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 0.9; transform: scale(1.06); }
     }
     header {
       position: relative;
@@ -299,13 +325,23 @@
 </head>
 <body>
 
-  <!-- Zwevende bouncende ballen -->
-  <div class="bubbles">
-    <div class="bubble" style="width: 300px; height: 300px; top: 10%; left: 5%;"></div>
-    <div class="bubble" style="width: 250px; height: 250px; top: 40%; right: 10%;"></div>
-    <div class="bubble" style="width: 350px; height: 350px; bottom: 15%; left: 20%;"></div>
-    <div class="bubble" style="width: 200px; height: 200px; bottom: 30%; right: 15%;"></div>
-    <div class="bubble" style="width: 280px; height: 280px; top: 60%; left: 50%;"></div>
+  <!-- Zwevende kleine glossy ballen -->
+  <div class="decor-balls">
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
   </div>
 
   <header>
@@ -402,51 +438,6 @@
   </footer>
 
   <script>
-    // Bouncing balls met collision
-    const bubbles = document.querySelectorAll('.bubble');
-    const bubbleArray = Array.from(bubbles).map(bubble => ({
-      el: bubble,
-      x: parseFloat(bubble.style.left) || Math.random() * window.innerWidth,
-      y: parseFloat(bubble.style.top) || Math.random() * window.innerHeight,
-      vx: (Math.random() - 0.5) * 2, // snelheid
-      vy: (Math.random() - 0.5) * 2,
-      radius: parseFloat(bubble.style.width) / 2
-    }));
-
-    function updateBubbles() {
-      bubbleArray.forEach((bubble, i) => {
-        bubble.x += bubble.vx;
-        bubble.y += bubble.vy;
-
-        // Bounce op randen
-        if (bubble.x < 0 || bubble.x > window.innerWidth - bubble.radius * 2) bubble.vx *= -1;
-        if (bubble.y < 0 || bubble.y > window.innerHeight - bubble.radius * 2) bubble.vy *= -1;
-
-        // Collision met andere ballen
-        bubbleArray.forEach((other, j) => {
-          if (i !== j) {
-            const dx = bubble.x - other.x;
-            const dy = bubble.y - other.y;
-            const distance = Math.sqrt(dx*dx + dy*dy);
-            if (distance < bubble.radius + other.radius) {
-              // Elastic bounce
-              const angle = Math.atan2(dy, dx);
-              bubble.vx = Math.cos(angle) * 1.5;
-              bubble.vy = Math.sin(angle) * 1.5;
-              other.vx = -Math.cos(angle) * 1.5;
-              other.vy = -Math.sin(angle) * 1.5;
-            }
-          }
-        });
-
-        bubble.el.style.left = `${bubble.x}px`;
-        bubble.el.style.top = `${bubble.y}px`;
-      });
-
-      requestAnimationFrame(updateBubbles);
-    }
-    updateBubbles();
-
     // Voorkom auto-scroll
     if (window.location.hash) {
       history.replaceState(null, null, window.location.pathname);
