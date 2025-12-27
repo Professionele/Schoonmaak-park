@@ -153,7 +153,7 @@
       visibility: visible;
     }
     .header-content {
-      margin-top: 6rem; /* Ruimte onder de header-bar */
+      margin-top: 6rem;
     }
     .tagline {
       font-size: 1.8rem;
@@ -377,6 +377,12 @@
   </footer>
 
   <script>
+    // Voorkom auto-scroll naar #contact bij laden
+    if (window.location.hash) {
+      history.replaceState(null, null, window.location.pathname);
+      window.scrollTo(0, 0);
+    }
+
     const hamburger = document.querySelector('.hamburger');
     const nav = document.getElementById('navMenu');
     const overlay = document.getElementById('overlay');
@@ -450,6 +456,11 @@
       const newTheme = currentTheme === 'light' ? 'dark' : 'light';
       body.setAttribute('data-theme', newTheme);
     }
+
+    // Force scroll to top na laden
+    window.addEventListener('load', () => {
+      window.scrollTo(0, 0);
+    });
   </script>
 
 </body>
