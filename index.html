@@ -14,6 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  
   <style>
     :root {
       --primary: #0288d1;
@@ -39,7 +40,9 @@
       --glass-border: rgba(79, 195, 247, 0.4);
       --shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
     }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    
     body {
       font-family: 'Poppins', sans-serif;
       color: var(--text-dark);
@@ -50,7 +53,8 @@
       position: relative;
       overflow-x: hidden;
     }
-    
+
+    /* MATTE GLAZEN BOLLEN STYLING */
     .decor-balls {
       position: fixed;
       inset: 0;
@@ -62,20 +66,19 @@
       border-radius: 50%;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.4);
       will-change: transform;
-      background: radial-gradient(circle at 35% 35%, 
-        rgba(255, 255, 255, 0.6) 0%, 
-        rgba(255, 255, 255, 0.1) 40%, 
+      background: radial-gradient(circle at 30% 30%, 
+        rgba(255, 255, 255, 0.7) 0%, 
+        rgba(255, 255, 255, 0.1) 50%, 
         rgba(0, 0, 0, 0.05) 100%);
       box-shadow: 
-        inset -8px -8px 20px rgba(0, 0, 0, 0.05),
-        inset 8px 8px 20px rgba(255, 255, 255, 0.4),
-        0 15px 35px rgba(0, 0, 0, 0.1);
-      left: 0; top: 0;
+        inset -5px -5px 15px rgba(0, 0, 0, 0.05),
+        inset 5px 5px 15px rgba(255, 255, 255, 0.4),
+        0 10px 30px rgba(0, 0, 0, 0.1);
     }
 
-    /* Standaard site styling behouden */
+    /* OUDE WEBSITE LAYOUT VOLLEDIG TERUG */
     header {
       position: relative;
       background: linear-gradient(to bottom, var(--primary-light), transparent);
@@ -91,40 +94,62 @@
       background: linear-gradient(135deg, var(--glass-top), var(--glass-bottom));
       backdrop-filter: blur(20px);
       border-radius: 16px; border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow);
       padding: 0.5rem 1.2rem; z-index: 1001; min-height: 80px;
     }
-    .logo-container { height: 90px; }
+    .logo-container { height: 90px; display: flex; align-items: center; }
     .logo-container img { height: 100%; border-radius: 6px; }
+    
     .hamburger { width: 40px; height: 30px; cursor: pointer; position: relative; }
-    .hamburger span { position: absolute; left: 0; width: 100%; height: 4px; background: var(--text-light); border-radius: 2px; }
+    .hamburger span { position: absolute; left: 0; width: 100%; height: 4px; background: var(--text-light); border-radius: 2px; transition: 0.3s; }
     .hamburger span:nth-child(1) { top: 0; }
     .hamburger span:nth-child(2) { top: 13px; }
     .hamburger span:nth-child(3) { top: 26px; }
-    
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+
     .nav {
       display: none; position: fixed; top: 80px; right: 20px; width: 180px;
       background: linear-gradient(135deg, var(--glass-top), var(--glass-bottom));
       backdrop-filter: blur(20px); border-radius: 20px; z-index: 99999; padding: 1rem 0;
     }
-    .nav.active { display: block; }
-    .nav a { display: block; color: var(--text-dark); text-decoration: none; padding: 1rem 1.5rem; }
+    .nav.active { display: block; opacity: 1; transform: translateY(0); }
+    .nav a { display: block; color: var(--text-dark); text-decoration: none; padding: 1rem 1.5rem; transition: 0.3s; }
+    .nav a:hover { padding-left: 2rem; color: var(--primary-light); }
 
     main { padding: 0 1.5rem; margin-top: -6rem; position: relative; z-index: 2; }
     .section {
       background: linear-gradient(135deg, var(--glass-top), var(--glass-bottom));
       backdrop-filter: blur(20px); border-radius: 24px; padding: 3rem 2rem; margin: 2.5rem 0;
-      border: 1px solid var(--glass-border); box-shadow: var(--shadow);
-      opacity: 0; transform: translateY(50px); transition: 1s ease-out;
+      box-shadow: var(--shadow); border: 1px solid var(--glass-border);
+      opacity: 0; transform: translateY(50px); transition: opacity 1s, transform 1s;
     }
     .section.visible { opacity: 1; transform: translateY(0); }
-    h2 { color: var(--primary); text-align: center; margin-bottom: 1.5rem; }
-    .btn { display: block; background: var(--primary); color: white; padding: 1.2rem; border-radius: 50px; text-align: center; text-decoration: none; margin: 2rem auto; max-width: 300px; }
+    
+    h2 { color: var(--primary); text-align: center; margin-bottom: 1.5rem; font-size: 2.2rem; }
+    ul li { margin: 1rem 0; padding-left: 2.5rem; position: relative; list-style: none; }
+    ul li::before { content: "✔"; color: var(--primary); position: absolute; left: 0; font-size: 1.5rem; top: -2px; }
+    
+    .btn {
+      display: block; background: var(--primary); color: white; padding: 1.2rem;
+      border-radius: 50px; text-align: center; font-weight: 600; text-decoration: none;
+      margin: 2rem auto; max-width: 300px; transition: 0.4s;
+    }
+    .btn:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(2,136,209,0.3); }
+
+    form { display: flex; flex-direction: column; gap: 1.5rem; }
+    input, textarea {
+      padding: 1.2rem; border: 1px solid var(--glass-border); border-radius: 12px;
+      background: rgba(255,255,255,0.6); backdrop-filter: blur(10px); outline: none;
+    }
+
+    footer { text-align: center; padding: 4rem 1rem 2rem; background: var(--primary); color: white; }
   </style>
 </head>
 <body>
 
-  <div class="decor-balls" id="ballContainer">
-    </div>
+  <div class="decor-balls" id="ballContainer"></div>
 
   <header>
     <div class="header-bar">
@@ -132,9 +157,9 @@
       <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
     </div>
     <nav class="nav" id="navMenu">
-      <a href="#home">Home</a>
-      <a href="#diensten">Diensten</a>
-      <a href="#contact">Contact</a>
+      <a href="#home" onclick="scrollToSection('#home')">Home</a>
+      <a href="#diensten" onclick="scrollToSection('#diensten')">Diensten</a>
+      <a href="#contact" onclick="scrollToSection('#contact')">Contact</a>
     </nav>
     <div class="header-content">
       <p class="tagline">Professionele industriële reiniging – schoon, veilig & duurzaam</p>
@@ -142,35 +167,87 @@
   </header>
 
   <main>
-    <section class="section visible" id="home">
+    <section class="section" id="home">
       <h2>Welkom bij Schoonmaak Park</h2>
-      <p>Industriële reiniging is werk voor specialisten. Wij zorgen voor een propere en veilige omgeving.</p>
+      <p>Industriële reiniging is werk voor specialisten. Schoonmaak Park zorgt ervoor dat uw medewerkers in een propere – en dus ook veiliger – omgeving aan de slag kunnen.</p>
+      <ul>
+        <li>Persoonlijke aanpak op maat</li>
+        <li>VCA-gecertificeerd</li>
+        <li>Altijd in uw buurt</li>
+      </ul>
     </section>
 
-    <section class="section visible" id="diensten">
+    <section class="section" id="diensten">
       <h2>Onze diensten</h2>
       <ul>
         <li>Hogedrukreiniging</li>
         <li>Droogijsstralen</li>
-        <li>Ontvetting</li>
+        <li>Ontvetting & dieptereiniging</li>
+        <li>Reiniging op hoogte</li>
       </ul>
     </section>
 
-    <section class="section visible" id="contact">
+    <section class="section">
+      <h2>Reiniging op hoogte</h2>
+      <div style="text-align:center; margin:2.5rem 0;">
+        <img src="Hoogtewerk.jpg" alt="Hoogte" style="max-width:100%; border-radius:24px; box-shadow:var(--shadow);">
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Bootreiniging 🛥️</h2>
+      <div style="text-align:center; margin:2.5rem 0;">
+        <img src="Boot.jpg" alt="Boot" style="max-width:100%; border-radius:24px; box-shadow:var(--shadow);">
+      </div>
+    </section>
+
+    <section class="section" id="contact">
       <h2>Contacteer mij</h2>
-      <a href="mailto:info@schoonmaakpark.be" class="btn">Stuur een e-mail</a>
+      <form action="https://formspree.io/f/xjgvbkan" method="POST">
+        <input type="text" name="naam" placeholder="Je naam *" required>
+        <input type="tel" name="telefoon" placeholder="Telefoonnummer *" required>
+        <input type="email" name="email" placeholder="E-mailadres *" required>
+        <textarea name="bericht" rows="5" placeholder="Je vraag of bericht..." required></textarea>
+        <button type="submit" class="btn">Verstuur aanvraag</button>
+      </form>
     </section>
   </main>
 
+  <footer>
+    © 2025 Schoonmaak Park<br>
+    <small>VCA-gecertificeerd | Privacy</small>
+  </footer>
+
   <script>
+    // --- 1. OUDE ANIMATIE & NAV LOGICA ---
+    const hamburger = document.querySelector('.hamburger');
+    const nav = document.getElementById('navMenu');
+    
+    hamburger.onclick = () => {
+      hamburger.classList.toggle('active');
+      nav.classList.toggle('active');
+    };
+
+    function scrollToSection(id) {
+      const el = document.querySelector(id);
+      window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
+      hamburger.classList.remove('active');
+      nav.classList.remove('active');
+    }
+
+    const sections = document.querySelectorAll('.section');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    sections.forEach(s => observer.observe(s));
+
+    // --- 2. NIEUWE SNELLE GLAS PHYSICS ---
     const container = document.getElementById('ballContainer');
-    const numBalls = 12;
     const balls = [];
     let tiltX = 0, tiltY = 0;
 
-    // 1. Maak bollen aan op unieke plekken
-    for (let i = 0; i < numBalls; i++) {
-      const size = Math.random() * 60 + 80;
+    for (let i = 0; i < 12; i++) {
+      const size = Math.random() * 50 + 80;
       const el = document.createElement('div');
       el.className = 'bubble';
       el.style.width = size + 'px';
@@ -182,74 +259,55 @@
         radius: size / 2,
         x: Math.random() * (window.innerWidth - size),
         y: Math.random() * (window.innerHeight - size),
-        vx: 0,
-        vy: 0,
-        mass: size / 10
+        vx: 0, vy: 0
       });
     }
 
-    // 2. Gyroscoop input (Sneller ingesteld)
     if (window.DeviceOrientationEvent) {
       window.addEventListener('deviceorientation', (e) => {
-        tiltX = e.gamma * 0.4; // Gevoeligheid verhoogd
-        tiltY = e.beta * 0.4;
+        tiltX = e.gamma * 0.5; // Zeer gevoelig
+        tiltY = e.beta * 0.5;
       });
     }
 
-    // 3. Physics Engine (Collision + Movement)
-    function update() {
-      for (let i = 0; i < balls.length; i++) {
-        let b = balls[i];
-
-        // Beweging door tilt
-        b.vx += tiltX * 0.1;
-        b.vy += tiltY * 0.1;
-
-        // Wrijving
-        b.vx *= 0.95;
-        b.vy *= 0.95;
-
+    function runPhysics() {
+      balls.forEach((b, i) => {
+        b.vx += tiltX * 0.15;
+        b.vy += tiltY * 0.15;
+        b.vx *= 0.94; // Wrijving
+        b.vy *= 0.94;
         b.x += b.vx;
         b.y += b.vy;
 
-        // Randen scherm
-        if (b.x < 0) { b.x = 0; b.vx *= -0.6; }
-        if (b.x > window.innerWidth - b.radius * 2) { b.x = window.innerWidth - b.radius * 2; b.vx *= -0.6; }
-        if (b.y < 0) { b.y = 0; b.vy *= -0.6; }
-        if (b.y > window.innerHeight - b.radius * 2) { b.y = window.innerHeight - b.radius * 2; b.vy *= -0.6; }
+        // Schermranden
+        if (b.x < 0) { b.x = 0; b.vx *= -0.7; }
+        if (b.x > window.innerWidth - b.radius * 2) { b.x = window.innerWidth - b.radius * 2; b.vx *= -0.7; }
+        if (b.y < 0) { b.y = 0; b.vy *= -0.7; }
+        if (b.y > window.innerHeight - b.radius * 2) { b.y = window.innerHeight - b.radius * 2; b.vy *= -0.7; }
 
-        // Botsing detectie tussen bollen
+        // Bollen botsen tegen elkaar
         for (let j = i + 1; j < balls.length; j++) {
           let b2 = balls[j];
           let dx = (b2.x + b2.radius) - (b.x + b.radius);
           let dy = (b2.y + b2.radius) - (b.y + b.radius);
-          let distance = Math.sqrt(dx * dx + dy * dy);
-          let minDistance = b.radius + b2.radius;
+          let dist = Math.sqrt(dx * dx + dy * dy);
+          let min = b.radius + b2.radius;
 
-          if (distance < minDistance) {
-            // Simpele elastische botsing
+          if (dist < min) {
             let angle = Math.atan2(dy, dx);
-            let targetX = b.x + Math.cos(angle) * minDistance;
-            let targetY = b.y + Math.sin(angle) * minDistance;
-            let ax = (targetX - (b2.x)) * 0.1;
-            let ay = (targetY - (b2.y)) * 0.1;
-            
+            let tx = b.x + Math.cos(angle) * min;
+            let ty = b.y + Math.sin(angle) * min;
+            let ax = (tx - b2.x) * 0.2;
+            let ay = (ty - b2.y) * 0.2;
             b.vx -= ax; b.vy -= ay;
             b2.vx += ax; b2.vy += ay;
           }
         }
-
         b.el.style.transform = `translate3d(${b.x}px, ${b.y}px, 0)`;
-      }
-      requestAnimationFrame(update);
+      });
+      requestAnimationFrame(runPhysics);
     }
-
-    update();
-
-    // Menu functionaliteit
-    document.getElementById('hamburger').onclick = () => {
-      document.getElementById('navMenu').classList.toggle('active');
-    };
+    runPhysics();
   </script>
 </body>
 </html>
