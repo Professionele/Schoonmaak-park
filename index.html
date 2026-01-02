@@ -10,14 +10,6 @@
   <meta property="og:image" content="PRESSURESPRO.jpg" />
   <meta property="og:url" content="https://professionionele.github.io/Schoonmaak-park/" />
   <meta property="og:type" content="website" />
-  <meta property="og:image:width" content="200" />
-  <meta property="og:image:height" content="301" />
-  <meta property="og:image:alt" content="PRESSURES PRO Logo" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Schoonmaak Park - Industriële Reiniging" />
-  <meta name="twitter:description" content="Professionele industriële reiniging: schoon, veilig & duurzaam. VCA-gecertificeerd." />
-  <meta name="twitter:image" content="PRESSURESPRO.jpg" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -59,7 +51,6 @@
       overflow-x: hidden;
     }
     
-    /* REALISTISCHE MATTE GLAZEN BOLLEN */
     .decor-balls {
       position: fixed;
       inset: 0;
@@ -69,537 +60,196 @@
     .bubble {
       position: absolute;
       border-radius: 50%;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
       will-change: transform;
-      /* Glaslook door gradients */
-      background: radial-gradient(circle at 30% 30%, 
-        rgba(255, 255, 255, 0.8) 0%, 
-        rgba(255, 255, 255, 0.1) 50%, 
+      background: radial-gradient(circle at 35% 35%, 
+        rgba(255, 255, 255, 0.6) 0%, 
+        rgba(255, 255, 255, 0.1) 40%, 
         rgba(0, 0, 0, 0.05) 100%);
       box-shadow: 
-        inset -5px -5px 15px rgba(0, 0, 0, 0.1),
-        inset 5px 5px 15px rgba(255, 255, 255, 0.5),
-        0 10px 30px rgba(0, 0, 0, 0.1);
-    }
-    [data-theme="dark"] .bubble {
-      background: radial-gradient(circle at 30% 30%, 
-        rgba(255, 255, 255, 0.2) 0%, 
-        rgba(255, 255, 255, 0.05) 50%, 
-        rgba(0, 0, 0, 0.3) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        inset -8px -8px 20px rgba(0, 0, 0, 0.05),
+        inset 8px 8px 20px rgba(255, 255, 255, 0.4),
+        0 15px 35px rgba(0, 0, 0, 0.1);
+      left: 0; top: 0;
     }
 
-    [data-theme="dark"] h2,
-    [data-theme="dark"] .contact-title,
-    [data-theme="dark"] .contact-info {
-      color: var(--primary-light) !important;
-      text-shadow: 0 0 20px var(--primary-light), 0 0 40px var(--primary-light), 0 0 60px var(--primary-light);
-    }
+    /* Standaard site styling behouden */
     header {
       position: relative;
       background: linear-gradient(to bottom, var(--primary-light), transparent);
       color: var(--text-light);
       padding: 7rem 1.5rem 9rem;
       text-align: center;
-      overflow: hidden;
       z-index: 1;
     }
     .header-bar {
       position: absolute;
-      top: 1rem;
-      left: 1rem;
-      right: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      top: 1rem; left: 1rem; right: 1rem;
+      display: flex; justify-content: space-between; align-items: center;
       background: linear-gradient(135deg, var(--glass-top), var(--glass-bottom));
       backdrop-filter: blur(20px);
-      border-radius: 16px;
-      border: 1px solid var(--glass-border);
-      box-shadow: var(--shadow);
-      padding: 0.5rem 1.2rem;
-      z-index: 1001;
-      min-height: 80px;
+      border-radius: 16px; border: 1px solid var(--glass-border);
+      padding: 0.5rem 1.2rem; z-index: 1001; min-height: 80px;
     }
-    .logo-container {
-      height: 90px;
-      width: auto;
-      display: flex;
-      align-items: center;
-    }
-    .logo-container img {
-      height: 100%;
-      width: auto;
-      display: block;
-      border-radius: 6px;
-    }
-    .hamburger {
-      width: 40px;
-      height: 30px;
-      cursor: pointer;
-      position: relative;
-    }
-    .hamburger span {
-      position: absolute;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: var(--text-light);
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
+    .logo-container { height: 90px; }
+    .logo-container img { height: 100%; border-radius: 6px; }
+    .hamburger { width: 40px; height: 30px; cursor: pointer; position: relative; }
+    .hamburger span { position: absolute; left: 0; width: 100%; height: 4px; background: var(--text-light); border-radius: 2px; }
     .hamburger span:nth-child(1) { top: 0; }
     .hamburger span:nth-child(2) { top: 13px; }
     .hamburger span:nth-child(3) { top: 26px; }
-    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
-    .hamburger.active span:nth-child(2) { opacity: 0; }
-    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+    
     .nav {
-      display: none;
-      position: fixed;
-      top: 80px;
-      right: 20px;
-      width: 180px;
+      display: none; position: fixed; top: 80px; right: 20px; width: 180px;
       background: linear-gradient(135deg, var(--glass-top), var(--glass-bottom));
-      backdrop-filter: blur(20px);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 30px rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 20px;
-      transform: translateY(-40px) scale(0.9);
-      opacity: 0;
-      transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
-      z-index: 99999;
-      padding: 1rem 0;
-      overflow: hidden;
+      backdrop-filter: blur(20px); border-radius: 20px; z-index: 99999; padding: 1rem 0;
     }
-    .nav.active {
-      display: block;
-      transform: translateY(0) scale(1);
-      opacity: 1;
-    }
-    .nav a {
-      display: block;
-      color: var(--text-dark);
-      text-decoration: none;
-      padding: 1rem 1.5rem;
-      font-size: 1rem;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-    .nav a:hover {
-      background: rgba(255,255,255,0.2);
-      color: var(--primary-light);
-      padding-left: 2rem;
-    }
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.4);
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.4s ease;
-      z-index: 99998;
-    }
-    .overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-    .header-content {
-      margin-top: 6rem;
-    }
-    .tagline {
-      font-size: 1.8rem;
-      max-width: 800px;
-      margin: 0 auto;
-      color: var(--text-light);
-      font-weight: 500;
-      letter-spacing: 0.5px;
-    }
-    main {
-      padding: 0 1.5rem;
-      margin-top: -6rem;
-      position: relative;
-      z-index: 2;
-    }
+    .nav.active { display: block; }
+    .nav a { display: block; color: var(--text-dark); text-decoration: none; padding: 1rem 1.5rem; }
+
+    main { padding: 0 1.5rem; margin-top: -6rem; position: relative; z-index: 2; }
     .section {
       background: linear-gradient(135deg, var(--glass-top), var(--glass-bottom));
-      backdrop-filter: blur(20px);
-      border-radius: 24px;
-      padding: 3rem 2rem;
-      margin: 2.5rem 0;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--glass-border);
-      opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 1s ease-out, transform 1s ease-out;
+      backdrop-filter: blur(20px); border-radius: 24px; padding: 3rem 2rem; margin: 2.5rem 0;
+      border: 1px solid var(--glass-border); box-shadow: var(--shadow);
+      opacity: 0; transform: translateY(50px); transition: 1s ease-out;
     }
-    .section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    h2 {
-      color: var(--primary);
-      text-align: center;
-      margin-bottom: 1.5rem;
-      font-size: 2.2rem;
-    }
-    ul { list-style: none; }
-    ul li { margin: 1rem 0; padding-left: 2.5rem; position: relative; font-size: 1.1rem; }
-    ul li::before { content: "✔"; color: var(--primary); position: absolute; left: 0; font-size: 1.5rem; top: -2px; }
-    .btn {
-      display: block;
-      background: var(--primary);
-      color: white;
-      padding: 1.2rem;
-      border-radius: 50px;
-      text-align: center;
-      font-size: 1.2rem;
-      font-weight: 600;
-      text-decoration: none;
-      margin: 2rem auto;
-      max-width: 300px;
-      transition: all 0.4s;
-    }
-    .btn:hover { background: var(--primary-light); transform: translateY(-4px); box-shadow: 0 12px 30px rgba(2,136,209,0.3); }
-    form { display: flex; flex-direction: column; gap: 1.5rem; }
-    input, textarea {
-      padding: 1.2rem;
-      border: 1px solid var(--glass-border);
-      border-radius: 12px;
-      background: rgba(255,255,255,0.6);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 4px 20px rgba(79,195,247,0.2);
-      font-size: 1rem;
-      color: var(--text-dark);
-      transition: all 0.3s ease;
-      outline: none;
-    }
-    input:focus, textarea:focus {
-      border-color: var(--primary-light);
-      box-shadow: 0 0 20px rgba(79,195,247,0.5);
-      transform: translateY(-2px);
-    }
-    footer {
-      text-align: center;
-      padding: 4rem 1rem 2rem;
-      background: linear-gradient(to bottom, var(--primary-light), var(--primary));
-      color: white;
-      position: relative;
-      z-index: 1;
-    }
-    [data-theme="dark"] footer {
-      background: linear-gradient(to bottom, #001f3f, #000b1e);
-      box-shadow: inset 0 0 20px rgba(129, 212, 250, 0.3);
-    }
-    footer small {
-      font-size: 0.9rem;
-      opacity: 0.9;
-      color: var(--text-light);
-      text-shadow: 0 0 8px rgba(129, 212, 250, 0.5);
-    }
-    @media (min-width: 768px) {
-      .hamburger { display: none; }
-      .nav {
-        display: flex;
-        flex-direction: row;
-        position: static;
-        background: transparent;
-        backdrop-filter: none;
-        box-shadow: none;
-        transform: none;
-        opacity: 1;
-        padding: 0;
-        width: auto;
-      }
-      .nav a {
-        padding: 0 1.5rem;
-        color: white;
-      }
-      .nav a:hover { color: var(--primary-light); }
-      .theme-switch { display: none; }
-      header { padding: 10rem 2rem 12rem; }
-      .header-bar {
-        top: 2rem;
-        left: 2rem;
-        right: 2rem;
-        padding: 0.5rem 1.5rem;
-      }
-      .logo-container {
-        height: 100px;
-        width: auto;
-      }
-      .tagline { font-size: 2.2rem; }
-    }
+    .section.visible { opacity: 1; transform: translateY(0); }
+    h2 { color: var(--primary); text-align: center; margin-bottom: 1.5rem; }
+    .btn { display: block; background: var(--primary); color: white; padding: 1.2rem; border-radius: 50px; text-align: center; text-decoration: none; margin: 2rem auto; max-width: 300px; }
   </style>
 </head>
 <body>
 
-  <div class="decor-balls">
-    <div class="bubble" style="width: 120px; height: 120px;"></div>
-    <div class="bubble" style="width: 100px; height: 100px;"></div>
-    <div class="bubble" style="width: 140px; height: 140px;"></div>
-    <div class="bubble" style="width: 110px; height: 110px;"></div>
-    <div class="bubble" style="width: 130px; height: 130px;"></div>
-    <div class="bubble" style="width: 90px; height: 90px;"></div>
-    <div class="bubble" style="width: 150px; height: 150px;"></div>
-    <div class="bubble" style="width: 80px; height: 80px;"></div>
-    <div class="bubble" style="width: 160px; height: 160px;"></div>
-    <div class="bubble" style="width: 115px; height: 115px;"></div>
-    <div class="bubble" style="width: 125px; height: 125px;"></div>
-    <div class="bubble" style="width: 105px; height: 105px;"></div>
-    <div class="bubble" style="width: 145px; height: 145px;"></div>
-    <div class="bubble" style="width: 95px; height: 95px;"></div>
-    <div class="bubble" style="width: 135px; height: 135px;"></div>
-  </div>
+  <div class="decor-balls" id="ballContainer">
+    </div>
 
   <header>
     <div class="header-bar">
-      <div class="logo-container">
-        <img src="PRESSURESPRO.jpg" alt="PRESSURES PRO Logo">
-      </div>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+      <div class="logo-container"><img src="PRESSURESPRO.jpg" alt="Logo"></div>
+      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
     </div>
     <nav class="nav" id="navMenu">
-      <a href="#home" onclick="scrollToSection('#home')">Home</a>
-      <a href="#diensten" onclick="scrollToSection('#diensten')">Diensten</a>
-      <a href="#contact" onclick="scrollToSection('#contact')">Contact</a>
-      <div class="theme-switch">
-        <label>Dark Mode</label>
-        <label class="switch">
-          <input type="checkbox" id="themeCheckbox" onchange="toggleTheme()">
-          <span class="slider"></span>
-        </label>
-      </div>
+      <a href="#home">Home</a>
+      <a href="#diensten">Diensten</a>
+      <a href="#contact">Contact</a>
     </nav>
-    <div class="overlay" id="overlay"></div>
     <div class="header-content">
       <p class="tagline">Professionele industriële reiniging – schoon, veilig & duurzaam</p>
     </div>
-    <div class="header-fade"></div>
   </header>
 
   <main>
-    <section class="section" id="home">
+    <section class="section visible" id="home">
       <h2>Welkom bij Schoonmaak Park</h2>
-      <p>Industriële reiniging is werk voor specialisten. Schoonmaak Park zorgt ervoor dat uw medewerkers in een propere – en dus ook veiliger – omgeving aan de slag kunnen. Met meer dan 10 jaar ervaring ben ik uw betrouwbare partner voor industriële schoonmaak in heel België.</p>
-      <ul>
-        <li>Persoonlijke aanpak op maat</li>
-        <li>VCA-gecertificeerd</li>
-        <li>Altijd in uw buurt</li>
-        <li>Corona-proof methodes</li>
-      </ul>
+      <p>Industriële reiniging is werk voor specialisten. Wij zorgen voor een propere en veilige omgeving.</p>
     </section>
 
-    <section class="section" id="diensten">
+    <section class="section visible" id="diensten">
       <h2>Onze diensten</h2>
-      <p>Voor elke industriële reiniging de gepaste oplossing. Wij zoeken steeds naar de beste manier om kwaliteit te leveren.</p>
       <ul>
         <li>Hogedrukreiniging</li>
         <li>Droogijsstralen</li>
-        <li>Ontvetting & dieptereiniging</li>
-        <li>Reiniging op hoogte</li>
-        <li>Ventilatie- en machine-reiniging</li>
-      </ul>
-      <p style="text-align:center; margin-top:2rem;">Vraag gerust een vrijblijvende offerte aan!</p>
-    </section>
-
-    <section class="section">
-      <h2>Auto-ramen professioneel wassen</h2>
-      <p>Alleen autoruiten – 100% streeploos en glanzend. Binnen en buiten perfect schoon.</p>
-      <ul>
-        <li>Streepvrij resultaat</li>
-        <li>Speciale glasreiniging</li>
-        <li>Snel en professioneel</li>
+        <li>Ontvetting</li>
       </ul>
     </section>
 
-    <section class="section">
-      <h2>Huizenramen professioneel wassen</h2>
-      <p>Alleen huizenramen – 100% streeploos en glanzend. Binnen en buiten perfect schoon.</p>
-      <ul>
-        <li>Professioneel op hoogte</li>
-        <li>Streepvrij resultaat</li>
-        <li>Snel en veilig</li>
-      </ul>
-    </section>
-
-    <section class="section">
-      <h2>Reiniging op hoogte</h2>
-      <p>Professionele reiniging op hoogte – veilig, efficiënt en met professionele apparatuur.</p>
-      <ul>
-        <li>Gevelreiniging op hoogte</li>
-        <li>Ramen en glas op hoogte</li>
-        <li>Dakgoten en zonnepanelen</li>
-        <li>Veiligheid altijd prioriteit</li>
-      </ul>
-
-      <div style="text-align:center; margin:2.5rem 0;">
-        <img src="Hoogtewerk.jpg" alt="Reiniging op hoogte voorbeeld" style="max-width:100%; height:auto; border-radius:24px; box-shadow:var(--shadow); backdrop-filter:blur(20px); border:1px solid var(--glass-border);">
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>Bootreiniging 🛥️</h2>
-      <p>Professionele reiniging van boten, jachten en schepen – exterieur en interieur.</p>
-      <ul>
-        <li>Rompen, dekken en ramen</li>
-        <li>Interieur schoon en fris</li>
-        <li>Streepvrij en glanzend</li>
-      </ul>
-
-      <div style="text-align:center; margin:2.5rem 0;">
-        <img src="Boot.jpg" alt="Bootreiniging voorbeeld" style="max-width:100%; height:auto; border-radius:24px; box-shadow:var(--shadow); backdrop-filter:blur(20px); border:1px solid var(--glass-border);">
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>Onze aanpak</h2>
-      <p>Via frequente opleidingen en een nauwgezette opvolging ben ik steeds op de hoogte van de nieuwste technieken. Na een grondige kennismaking met uw bedrijf bied ik een oplossing op maat.</p>
-    </section>
-
-    <section class="section">
-      <h2>Certificering</h2>
-      <p>Schoonmaak Park is VCA-gecertificeerd. Dit betekent dat ik werk volgens de strengste normen voor veiligheid, gezondheid en milieu.</p>
-    </section>
-
-    <section class="section" id="contact">
-      <h2 class="contact-title">Contacteer mij</h2>
-      <div style="text-align:center; margin:2rem 0;">
-        <a href="mailto:info@schoonmaakpark.be" class="contact-info" style="font-size:1.4rem; text-decoration:none;">✉️ info@schoonmaakpark.be</a>
-      </div>
-
-      <form action="https://formspree.io/f/xjgvbkan" method="POST">
-        <input type="text" name="naam" placeholder="Je naam *" required>
-        <input type="tel" name="telefoon" placeholder="Telefoonnummer *" required>
-        <input type="email" name="email" placeholder="E-mailadres *" required>
-        <textarea name="bericht" rows="5" placeholder="Je vraag of bericht..." required></textarea>
-        <button type="submit" class="btn">Verstuur aanvraag</button>
-      </form>
+    <section class="section visible" id="contact">
+      <h2>Contacteer mij</h2>
+      <a href="mailto:info@schoonmaakpark.be" class="btn">Stuur een e-mail</a>
     </section>
   </main>
 
-  <footer>
-    © 2025 Schoonmaak Park – Zelfstandig & betrouwbaar<br>
-    <small>VCA-gecertificeerd | Privacy | Algemene voorwaarden</small>
-  </footer>
-
   <script>
-    // Hamburger menu
-    const hamburger = document.querySelector('.hamburger');
-    const nav = document.getElementById('navMenu');
-    const overlay = document.getElementById('overlay');
+    const container = document.getElementById('ballContainer');
+    const numBalls = 12;
+    const balls = [];
+    let tiltX = 0, tiltY = 0;
 
-    function toggleMenu() {
-      hamburger.classList.toggle('active');
-      nav.classList.toggle('active');
-      overlay.classList.toggle('active');
+    // 1. Maak bollen aan op unieke plekken
+    for (let i = 0; i < numBalls; i++) {
+      const size = Math.random() * 60 + 80;
+      const el = document.createElement('div');
+      el.className = 'bubble';
+      el.style.width = size + 'px';
+      el.style.height = size + 'px';
+      container.appendChild(el);
+
+      balls.push({
+        el: el,
+        radius: size / 2,
+        x: Math.random() * (window.innerWidth - size),
+        y: Math.random() * (window.innerHeight - size),
+        vx: 0,
+        vy: 0,
+        mass: size / 10
+      });
     }
 
-    hamburger.addEventListener('click', toggleMenu);
-    overlay.addEventListener('click', toggleMenu);
-
-    window.addEventListener('scroll', () => {
-      if (nav.classList.contains('active')) {
-        toggleMenu();
-      }
-    });
-
-    function scrollToSection(id) {
-      const element = document.querySelector(id);
-      if (element) {
-        window.scrollTo({
-          top: element.offsetTop - 80,
-          behavior: 'smooth'
-        });
-        if (nav.classList.contains('active')) {
-          toggleMenu();
-        }
-      }
-    }
-
-    // --- REALISTISCHE SENSOR BOLLEN ENGINE ---
-    const bubbles = document.querySelectorAll('.bubble');
-    let tiltX = 0;
-    let tiltY = 0;
-
-    const bubbleArray = Array.from(bubbles).map(bubble => ({
-      el: bubble,
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
-      vx: (Math.random() - 0.5) * 2,
-      vy: (Math.random() - 0.5) * 2,
-      radius: parseFloat(bubble.style.width) / 2
-    }));
-
-    // Luister naar de gsm beweging (Gyroscoop)
+    // 2. Gyroscoop input (Sneller ingesteld)
     if (window.DeviceOrientationEvent) {
-      window.addEventListener('deviceorientation', (event) => {
-        // Gamma is links/rechts kantelen, Beta is voor/achter kantelen
-        tiltX = event.gamma * 0.15; 
-        tiltY = event.beta * 0.15;
+      window.addEventListener('deviceorientation', (e) => {
+        tiltX = e.gamma * 0.4; // Gevoeligheid verhoogd
+        tiltY = e.beta * 0.4;
       });
     }
 
-    function updateBubbles() {
-      bubbleArray.forEach((bubble) => {
-        // Voeg zwaartekracht toe op basis van kanteling gsm
-        bubble.vx += tiltX * 0.05;
-        bubble.vy += tiltY * 0.05;
+    // 3. Physics Engine (Collision + Movement)
+    function update() {
+      for (let i = 0; i < balls.length; i++) {
+        let b = balls[i];
 
-        // Wrijving (om ze niet oneindig te laten versnellen)
-        bubble.vx *= 0.98;
-        bubble.vy *= 0.98;
+        // Beweging door tilt
+        b.vx += tiltX * 0.1;
+        b.vy += tiltY * 0.1;
 
-        bubble.x += bubble.vx;
-        bubble.y += bubble.vy;
+        // Wrijving
+        b.vx *= 0.95;
+        b.vy *= 0.95;
 
-        // Randdetectie (stuiteren tegen de muren van de gsm)
-        if (bubble.x < 0) { bubble.x = 0; bubble.vx *= -0.5; }
-        if (bubble.x > window.innerWidth - bubble.radius * 2) { bubble.x = window.innerWidth - bubble.radius * 2; bubble.vx *= -0.5; }
-        if (bubble.y < 0) { bubble.y = 0; bubble.vy *= -0.5; }
-        if (bubble.y > window.innerHeight - bubble.radius * 2) { bubble.y = window.innerHeight - bubble.radius * 2; bubble.vy *= -0.5; }
+        b.x += b.vx;
+        b.y += b.vy;
 
-        bubble.el.style.transform = `translate3d(${bubble.x}px, ${bubble.y}px, 0)`;
-      });
+        // Randen scherm
+        if (b.x < 0) { b.x = 0; b.vx *= -0.6; }
+        if (b.x > window.innerWidth - b.radius * 2) { b.x = window.innerWidth - b.radius * 2; b.vx *= -0.6; }
+        if (b.y < 0) { b.y = 0; b.vy *= -0.6; }
+        if (b.y > window.innerHeight - b.radius * 2) { b.y = window.innerHeight - b.radius * 2; b.vy *= -0.6; }
 
-      requestAnimationFrame(updateBubbles);
-    }
-    updateBubbles();
+        // Botsing detectie tussen bollen
+        for (let j = i + 1; j < balls.length; j++) {
+          let b2 = balls[j];
+          let dx = (b2.x + b2.radius) - (b.x + b.radius);
+          let dy = (b2.y + b2.radius) - (b.y + b.radius);
+          let distance = Math.sqrt(dx * dx + dy * dy);
+          let minDistance = b.radius + b2.radius;
 
-    // Secties fade-in
-    const sections = document.querySelectorAll('.section');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+          if (distance < minDistance) {
+            // Simpele elastische botsing
+            let angle = Math.atan2(dy, dx);
+            let targetX = b.x + Math.cos(angle) * minDistance;
+            let targetY = b.y + Math.sin(angle) * minDistance;
+            let ax = (targetX - (b2.x)) * 0.1;
+            let ay = (targetY - (b2.y)) * 0.1;
+            
+            b.vx -= ax; b.vy -= ay;
+            b2.vx += ax; b2.vy += ay;
+          }
         }
-      });
-    }, { threshold: 0.1 });
 
-    sections.forEach(section => observer.observe(section));
-
-    function toggleTheme() {
-      const body = document.body;
-      const currentTheme = body.getAttribute('data-theme') || 'light';
-      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-      body.setAttribute('data-theme', newTheme);
+        b.el.style.transform = `translate3d(${b.x}px, ${b.y}px, 0)`;
+      }
+      requestAnimationFrame(update);
     }
 
-    window.addEventListener('load', () => {
-      window.scrollTo(0, 0);
-    });
-  </script>
+    update();
 
+    // Menu functionaliteit
+    document.getElementById('hamburger').onclick = () => {
+      document.getElementById('navMenu').classList.toggle('active');
+    };
+  </script>
 </body>
 </html>
