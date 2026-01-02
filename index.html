@@ -58,6 +58,8 @@
       position: relative;
       overflow-x: hidden;
     }
+    
+    /* REALISTISCHE MATTE GLAZEN BOLLEN */
     .decor-balls {
       position: fixed;
       inset: 0;
@@ -67,19 +69,29 @@
     .bubble {
       position: absolute;
       border-radius: 50%;
-      box-shadow: 0 0 30px var(--primary-light);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
       will-change: transform;
-      transition: transform 0.15s ease-out;
-    }
-    [data-theme="light"] .bubble {
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.7), rgba(79,195,247,0.5));
+      /* Glaslook door gradients */
+      background: radial-gradient(circle at 30% 30%, 
+        rgba(255, 255, 255, 0.8) 0%, 
+        rgba(255, 255, 255, 0.1) 50%, 
+        rgba(0, 0, 0, 0.05) 100%);
+      box-shadow: 
+        inset -5px -5px 15px rgba(0, 0, 0, 0.1),
+        inset 5px 5px 15px rgba(255, 255, 255, 0.5),
+        0 10px 30px rgba(0, 0, 0, 0.1);
     }
     [data-theme="dark"] .bubble {
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0.4));
-      box-shadow: 0 0 40px rgba(255,255,255,0.6);
+      background: radial-gradient(circle at 30% 30%, 
+        rgba(255, 255, 255, 0.2) 0%, 
+        rgba(255, 255, 255, 0.05) 50%, 
+        rgba(0, 0, 0, 0.3) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     }
+
     [data-theme="dark"] h2,
     [data-theme="dark"] .contact-title,
     [data-theme="dark"] .contact-info {
@@ -461,11 +473,6 @@
       <p>Schoonmaak Park is VCA-gecertificeerd. Dit betekent dat ik werk volgens de strengste normen voor veiligheid, gezondheid en milieu.</p>
     </section>
 
-    <section class="section">
-      <h2>Corona-proof schoonmaken</h2>
-      <p>Sinds de uitbraak van Covid-19 heeft schoonmaak een extra dimensie gekregen. Ik zorg voor virusvrije en veilige ruimtes met extra aandacht voor contactpunten zoals schakelaars, hendels en klinken. Indien nodig plan ik een grondige desinfectie.</p>
-    </section>
-
     <section class="section" id="contact">
       <h2 class="contact-title">Contacteer mij</h2>
       <div style="text-align:center; margin:2rem 0;">
@@ -502,72 +509,68 @@
     hamburger.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', toggleMenu);
 
-    // NIEUW: Menu automatisch sluiten bij scrollen
     window.addEventListener('scroll', () => {
       if (nav.classList.contains('active')) {
         toggleMenu();
       }
     });
 
-    // Smooth scroll
     function scrollToSection(id) {
       const element = document.querySelector(id);
       if (element) {
-        const start = window.pageYOffset;
-        const target = element.getBoundingClientRect().top + start - 80;
-        const distance = target - start;
-        const duration = 1500;
-        let startTime = null;
-
-        function easeInOutQuad(t) {
-          return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-        }
-
-        function animation(currentTime) {
-          if (startTime === null) startTime = currentTime;
-          const timeElapsed = currentTime - startTime;
-          const progress = Math.min(timeElapsed / duration, 1);
-          const ease = easeInOutQuad(progress);
-          window.scrollTo(0, start + distance * ease);
-
-          if (timeElapsed < duration) requestAnimationFrame(animation);
-        }
-
-        requestAnimationFrame(animation);
-
+        window.scrollTo({
+          top: element.offsetTop - 80,
+          behavior: 'smooth'
+        });
         if (nav.classList.contains('active')) {
           toggleMenu();
         }
       }
     }
 
-    // Ballen animatie
+    // --- REALISTISCHE SENSOR BOLLEN ENGINE ---
     const bubbles = document.querySelectorAll('.bubble');
+    let tiltX = 0;
+    let tiltY = 0;
+
     const bubbleArray = Array.from(bubbles).map(bubble => ({
       el: bubble,
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
-      vx: (Math.random() - 0.5) * 0.6,
-      vy: (Math.random() - 0.5) * 0.6,
+      vx: (Math.random() - 0.5) * 2,
+      vy: (Math.random() - 0.5) * 2,
       radius: parseFloat(bubble.style.width) / 2
     }));
 
+    // Luister naar de gsm beweging (Gyroscoop)
+    if (window.DeviceOrientationEvent) {
+      window.addEventListener('deviceorientation', (event) => {
+        // Gamma is links/rechts kantelen, Beta is voor/achter kantelen
+        tiltX = event.gamma * 0.15; 
+        tiltY = event.beta * 0.15;
+      });
+    }
+
     function updateBubbles() {
-      bubbleArray.forEach((bubble, i) => {
+      bubbleArray.forEach((bubble) => {
+        // Voeg zwaartekracht toe op basis van kanteling gsm
+        bubble.vx += tiltX * 0.05;
+        bubble.vy += tiltY * 0.05;
+
+        // Wrijving (om ze niet oneindig te laten versnellen)
+        bubble.vx *= 0.98;
+        bubble.vy *= 0.98;
+
         bubble.x += bubble.vx;
         bubble.y += bubble.vy;
 
-        if (bubble.x < 0 || bubble.x > window.innerWidth - bubble.radius * 2) {
-          bubble.vx *= -0.85;
-          bubble.x = Math.max(0, Math.min(bubble.x, window.innerWidth - bubble.radius * 2));
-        }
-        if (bubble.y < 0 || bubble.y > window.innerHeight - bubble.radius * 2) {
-          bubble.vy *= -0.85;
-          bubble.y = Math.max(0, Math.min(bubble.y, window.innerHeight - bubble.radius * 2));
-        }
+        // Randdetectie (stuiteren tegen de muren van de gsm)
+        if (bubble.x < 0) { bubble.x = 0; bubble.vx *= -0.5; }
+        if (bubble.x > window.innerWidth - bubble.radius * 2) { bubble.x = window.innerWidth - bubble.radius * 2; bubble.vx *= -0.5; }
+        if (bubble.y < 0) { bubble.y = 0; bubble.vy *= -0.5; }
+        if (bubble.y > window.innerHeight - bubble.radius * 2) { bubble.y = window.innerHeight - bubble.radius * 2; bubble.vy *= -0.5; }
 
-        bubble.el.style.left = `${bubble.x}px`;
-        bubble.el.style.top = `${bubble.y}px`;
+        bubble.el.style.transform = `translate3d(${bubble.x}px, ${bubble.y}px, 0)`;
       });
 
       requestAnimationFrame(updateBubbles);
@@ -586,7 +589,6 @@
 
     sections.forEach(section => observer.observe(section));
 
-    // Theme toggle
     function toggleTheme() {
       const body = document.body;
       const currentTheme = body.getAttribute('data-theme') || 'light';
@@ -594,7 +596,6 @@
       body.setAttribute('data-theme', newTheme);
     }
 
-    // Reset hash on load
     window.addEventListener('load', () => {
       window.scrollTo(0, 0);
     });
