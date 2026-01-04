@@ -21,23 +21,26 @@
       --primary-light: #888888;
       --text-dark: #333333;
       --text-light: #ffffff;
-      --bg-light: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
-      --bg-dark: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-      --glass-bg-light: rgba(255, 255, 255, 0.9);
-      --glass-bg-dark: rgba(40, 40, 40, 0.9);
-      --glass-border: rgba(255, 255, 255, 0.3);
-      --shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+      --bg-light: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      --glass-bg: rgba(255, 255, 255, 0.75);
+      --glass-border: rgba(255, 255, 255, 0.5);
+      --accent-gradient: linear-gradient(90deg, var(--primary), var(--primary-light));
+      --shadow-deep: 0 20px 50px rgba(0, 0, 0, 0.1);
+      --shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.15);
     }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    
     body {
       font-family: 'Poppins', sans-serif;
       color: var(--text-dark);
-      line-height: 1.6;
+      line-height: 1.7;
       background: var(--bg-light);
       background-size: 300% 300%;
       animation: glossy-shine 30s ease infinite;
       overflow-x: hidden;
     }
+
     @keyframes glossy-shine {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
@@ -58,8 +61,8 @@
     }
 
     header.blurred {
-      filter: blur(10px) brightness(0.7);
-      transform: scale(1.05);
+      filter: blur(12px) brightness(0.65);
+      transform: scale(1.08);
     }
 
     .hero-spacer {
@@ -67,20 +70,23 @@
       pointer-events: none;
     }
 
+    /* NAVIGATION */
     .header-bar {
-      position: fixed; top: 1rem; left: 1rem; right: 1rem;
+      position: fixed; top: 1.5rem; left: 1rem; right: 1rem;
       display: flex; justify-content: flex-end; align-items: center;
       z-index: 1001; transition: 0.4s ease;
     }
     .hamburger-box {
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(10px);
-      padding: 10px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
       cursor: pointer;
+      transition: 0.3s;
     }
+    .hamburger-box:hover { background: rgba(255, 255, 255, 0.25); }
     .hamburger { width: 30px; height: 22px; position: relative; }
     .hamburger span {
       position: absolute; left: 0; width: 100%; height: 3px;
@@ -91,92 +97,147 @@
     .hamburger span:nth-child(3) { top: 20px; }
 
     .nav {
-      display: none; position: fixed; top: 80px; right: 15px; width: 180px;
-      background: var(--glass-bg-light); backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border); border-radius: 18px;
-      z-index: 99999; padding: 0.8rem 0; text-align: center;
+      display: none; position: fixed; top: 90px; right: 1.5rem; width: 200px;
+      background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(25px);
+      border: 1px solid var(--glass-border); border-radius: 20px;
+      z-index: 99999; padding: 1rem 0; text-align: center;
+      box-shadow: var(--shadow-deep);
       opacity: 0; transition: 0.3s ease; transform: translateY(-10px);
     }
     .nav.active { display: block; opacity: 1; transform: translateY(0); }
-    .nav a { display: block; color: var(--text-dark); text-decoration: none; padding: 1rem 0; font-weight: 600; }
+    .nav a { display: block; color: var(--text-dark); text-decoration: none; padding: 1rem 0; font-weight: 600; transition: 0.3s; }
+    .nav a:hover { color: var(--primary); background: rgba(0,0,0,0.03); }
 
+    /* MODERN SECTIONS */
     main { padding: 0 1rem; display: flex; flex-direction: column; align-items: center; width: 100%; position: relative; z-index: 1; }
+    
     .section {
-      background: var(--glass-bg-light);
-      backdrop-filter: blur(15px);
-      border-radius: 24px;
-      padding: 2.5rem 1.5rem;
-      margin: 2rem 0;
-      box-shadow: var(--shadow);
+      background: linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
+      backdrop-filter: blur(20px);
+      border-radius: 30px;
+      padding: 3.5rem 2rem;
+      margin: 2.5rem 0;
+      box-shadow: var(--shadow-deep);
       border: 1px solid var(--glass-border);
-      width: 100%; max-width: 800px;
-      opacity: 0; transform: translateY(50px); transition: 1s ease-out;
+      width: 100%; max-width: 850px;
+      opacity: 0; transform: translateY(60px); 
+      transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+      position: relative;
+      overflow: hidden;
     }
-    .section.visible { opacity: 1; transform: translateY(0); }
-    h2 { color: var(--primary); text-align: center; margin-bottom: 1.5rem; font-size: 2rem; font-weight: 700; }
-    ul { list-style: none; }
-    ul li { margin: 1rem 0; padding-left: 2.5rem; position: relative; color: var(--text-dark); }
-    ul li::before { content: "✔"; color: var(--primary); position: absolute; left: 0; font-weight: bold; }
 
-    .contact-form { display: flex; flex-direction: column; gap: 1.5rem; position: relative; }
-    .input-group { position: relative; overflow: hidden; border-radius: 12px; }
+    .section:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .section.visible { opacity: 1; transform: translateY(0); }
+
+    h2 { 
+      color: var(--primary); 
+      text-align: center; 
+      margin-bottom: 2rem; 
+      font-size: 2.2rem; 
+      font-weight: 700;
+      position: relative;
+    }
+
+    h2::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: var(--accent-gradient);
+      margin: 10px auto 0;
+      border-radius: 10px;
+    }
+
+    ul { list-style: none; margin-top: 1.5rem; }
+    ul li { margin: 1.2rem 0; padding-left: 2.8rem; position: relative; color: var(--text-dark); font-weight: 500; }
+    ul li::before { 
+      content: "✓"; 
+      color: white; 
+      background: var(--accent-gradient);
+      position: absolute; 
+      left: 0; 
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    /* FORM & BUTTONS */
+    .contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
+    .input-group { position: relative; border-radius: 16px; transition: 0.3s; }
     
     input, textarea {
-      width: 100%; padding: 1.2rem;
-      background: rgba(255, 255, 255, 0.4);
-      backdrop-filter: blur(5px);
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      border-radius: 12px;
+      width: 100%; padding: 1.3rem;
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      border-radius: 16px;
       font-size: 1rem; font-family: inherit;
       color: #333; outline: none; transition: 0.3s;
     }
 
-    .shimmer-bg::after {
-      content: ""; position: absolute; top: -50%; left: -50%;
-      width: 200%; height: 200%;
-      background: linear-gradient(to bottom right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
-      transform: rotate(30deg);
-      animation: shimmer 4s infinite linear;
-      pointer-events: none;
-    }
-    @keyframes shimmer {
-      0% { transform: translate(-100%, -100%) rotate(30deg); }
-      100% { transform: translate(100%, 100%) rotate(30deg); }
-    }
-
     input:focus, textarea:focus {
-      background: rgba(255, 255, 255, 0.7);
+      background: white;
       border-color: var(--primary);
-      box-shadow: 0 0 15px rgba(255,255,255,0.8);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     }
 
     .btn {
-      display: block; background: var(--primary); color: white;
-      padding: 1.2rem; border-radius: 50px; text-align: center;
-      font-weight: 600; text-decoration: none; margin-top: 1rem;
-      border: none; cursor: pointer; transition: 0.4s;
+      display: inline-block; 
+      background: var(--accent-gradient); 
+      color: white;
+      padding: 1.3rem 3rem; 
+      border-radius: 100px; 
+      text-align: center;
+      font-weight: 700; 
+      text-decoration: none; 
+      margin: 1.5rem auto 0;
+      border: none; 
+      cursor: pointer; 
+      transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 10px 25px rgba(85, 85, 85, 0.3);
     }
-    .btn:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
 
-    footer { 
-      text-align: center; padding: 3rem 1rem; color: var(--text-dark); position: relative; z-index: 1; 
+    .btn:hover { 
+      transform: scale(1.05) translateY(-3px); 
+      box-shadow: 0 15px 35px rgba(85, 85, 85, 0.4);
     }
+
+    /* FOOTER */
+    footer { text-align: center; padding: 4rem 1rem; position: relative; z-index: 1; }
     .footer-box {
-      background: var(--glass-bg-light);
+      background: rgba(255, 255, 255, 0.8);
       backdrop-filter: blur(15px);
-      padding: 1.5rem;
-      border-radius: 18px;
+      padding: 1.2rem 2.5rem;
+      border-radius: 50px;
       display: inline-block;
       border: 1px solid var(--glass-border);
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow-deep);
+      font-weight: 600;
+      color: var(--primary);
     }
+
+    img { border-radius: 20px; transition: 0.5s; box-shadow: var(--shadow-deep); }
+    img:hover { transform: scale(1.02); }
 
     @media (min-width: 768px) {
       .nav {
-        display: flex; position: fixed; top: 2rem; right: 2rem; width: auto; 
-        background: transparent; border: none; opacity: 1; transform: none;
+        display: flex; position: fixed; top: 2.5rem; right: 2rem; width: auto; 
+        background: transparent; border: none; opacity: 1; transform: none; box-shadow: none;
       }
-      .nav a { padding: 0 1.5rem; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+      .nav a { padding: 0.5rem 1.5rem; color: white; text-shadow: 0 2px 10px rgba(0,0,0,0.4); border-radius: 50px; }
+      .nav a:hover { background: rgba(255,255,255,0.2); color: white; }
       .hamburger-box { display: none; }
     }
   </style>
@@ -238,7 +299,7 @@
       <h2>Reiniging op hoogte</h2>
       <p>Veilig en efficiënt reinigen op moeilijk bereikbare plaatsen met gebruik van hoogwerkers.</p>
       <div style="text-align:center; margin:2rem 0;">
-        <img src="Hoogtewerk.jpg" alt="Hoogte" style="max-width:100%; border-radius:15px;">
+        <img src="Hoogtewerk.jpg" alt="Hoogte" style="max-width:100%;">
       </div>
     </section>
 
@@ -246,27 +307,27 @@
       <h2>Bootreiniging 🛥️</h2>
       <p>Grondige reiniging van rompen, dekken en interieurs van industriële en particuliere vaartuigen.</p>
       <div style="text-align:center; margin:2rem 0;">
-        <img src="Boot.jpg" alt="Boot" style="max-width:100%; border-radius:15px;">
+        <img src="Boot.jpg" alt="Boot" style="max-width:100%;">
       </div>
     </section>
 
     <section class="section" id="contact">
       <h2>Contacteer mij</h2>
-      <div style="text-align:center; margin-bottom: 2rem;">
-        <a href="mailto:info@lndustriëleSchoonmaak.be" style="text-decoration:none; color:var(--primary); font-weight:700;">✉️ info@lndustriëleSchoonmaak.be</a>
+      <div style="text-align:center; margin-bottom: 2.5rem;">
+        <a href="mailto:info@lndustriëleSchoonmaak.be" style="text-decoration:none; color:var(--primary); font-weight:700; font-size: 1.1rem;">✉️ info@lndustriëleSchoonmaak.be</a>
       </div>
       
       <form class="contact-form" action="https://formspree.io/f/xjgvbkan" method="POST">
-        <div class="input-group shimmer-bg">
+        <div class="input-group">
           <input type="text" name="naam" placeholder="Je naam *" required>
         </div>
-        <div class="input-group shimmer-bg">
+        <div class="input-group">
           <input type="tel" name="telefoon" placeholder="Telefoonnummer *" required>
         </div>
-        <div class="input-group shimmer-bg">
+        <div class="input-group">
           <input type="email" name="email" placeholder="E-mailadres *" required>
         </div>
-        <div class="input-group shimmer-bg">
+        <div class="input-group">
           <textarea name="bericht" rows="5" placeholder="Je bericht..." required></textarea>
         </div>
         <button type="submit" class="btn">Verstuur aanvraag</button>
@@ -312,7 +373,6 @@
     function scrollToSection(id) {
       const element = document.querySelector(id);
       if (element) {
-        // Een kleine offset van 80px zodat de titel niet onder de menu-balk verdwijnt
         const offsetTop = element.getBoundingClientRect().top + window.pageYOffset - 80;
         window.scrollTo({ top: offsetTop, behavior: 'smooth' });
         if (nav.classList.contains('active')) toggleMenu();
