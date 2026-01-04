@@ -23,7 +23,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    /* Zorgt voor een soepele scroll op browser niveau */
     html {
       scroll-behavior: smooth;
     }
@@ -134,8 +133,16 @@
       z-index: 99999;
       padding: 0.8rem 0;
       text-align: center;
+      /* Fade animatie voor het menu */
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      transform: translateY(-10px);
     }
-    .nav.active { display: block; }
+    .nav.active { 
+      display: block; 
+      opacity: 1;
+      transform: translateY(0);
+    }
     .nav a { display: block; color: var(--text-dark); text-decoration: none; padding: 1rem 0; font-weight: 500; }
 
     main {
@@ -209,6 +216,7 @@
       .nav {
         display: flex; position: fixed; top: 2rem; right: 2rem; width: auto; 
         background: transparent; box-shadow: none; border: none; padding: 0;
+        opacity: 1; transform: none;
       }
       .nav a { padding: 0 1.5rem; color: var(--text-light); }
       .header-bar { top: 2rem; left: 2rem; right: 2rem; }
@@ -254,37 +262,20 @@
         <li>Reiniging op hoogte</li>
         <li>Ventilatie- en machine-reiniging</li>
       </ul>
-      <p style="text-align:center; margin-top:2rem;">Vraag gerust een vrijblijvende offerte aan!</p>
     </section>
 
     <section class="section">
       <h2>Auto-ramen professioneel wassen</h2>
       <p>Alleen autoruiten – 100% streeploos en glanzend. Binnen en buiten perfect schoon.</p>
-      <ul>
-        <li>Streepvrij resultaat</li>
-        <li>Speciale glasreiniging</li>
-        <li>Snel en professioneel</li>
-      </ul>
     </section>
 
     <section class="section">
       <h2>Huizenramen professioneel wassen</h2>
       <p>Alleen huizenramen – 100% streeploos en glanzend. Binnen en buiten perfect schoon.</p>
-      <ul>
-        <li>Professioneel op hoogte</li>
-        <li>Streepvrij resultaat</li>
-        <li>Snel en veilig</li>
-      </ul>
     </section>
 
     <section class="section">
       <h2>Reiniging op hoogte</h2>
-      <p>Professionele reiniging op hoogte – veilig, efficiënt en met professionele apparatuur.</p>
-      <ul>
-        <li>Gevelreiniging op hoogte</li>
-        <li>Ramen en glas op hoogte</li>
-        <li>Dakgoten en zonnepanelen</li>
-      </ul>
       <div style="text-align:center; margin:2rem 0;">
         <img src="Hoogtewerk.jpg" alt="Hoogte" style="max-width:100%; height:auto; border-radius:15px;">
       </div>
@@ -292,7 +283,6 @@
 
     <section class="section">
       <h2>Bootreiniging 🛥️</h2>
-      <p>Professionele reiniging van boten, jachten en schepen – exterieur en interieur.</p>
       <div style="text-align:center; margin:2rem 0;">
         <img src="Boot.jpg" alt="Boot" style="max-width:100%; height:auto; border-radius:15px;">
       </div>
@@ -314,8 +304,7 @@
   </main>
 
   <footer>
-    © 2025 lndustriële Schoonmaak – Zelfstandig & betrouwbaar<br>
-    <small>VCA-gecertificeerd | Privacy | Algemene voorwaarden</small>
+    © 2025 lndustriële Schoonmaak – Zelfstandig & betrouwbaar
   </footer>
 
   <script>
@@ -325,17 +314,36 @@
     const headerBar = document.getElementById('headerBar');
     const heroHeader = document.getElementById('heroHeader');
 
+    // Functie om het menu te openen/sluiten
     function toggleMenu() {
       hamburger.classList.toggle('active');
       nav.classList.toggle('active');
       overlay.classList.toggle('active');
     }
 
-    hamburger.addEventListener('click', toggleMenu);
-    overlay.addEventListener('click', toggleMenu);
+    hamburger.addEventListener('click', (e) => {
+      e.stopPropagation(); // Voorkomt dat de klik direct weer als "buiten klikken" wordt gezien
+      toggleMenu();
+    });
 
+    // 1. SLUITEN BIJ KLIK BUITEN MENU
+    document.addEventListener('click', (e) => {
+      // Als het menu actief is en de klik is NIET op het menu of de hamburger
+      if (nav.classList.contains('active') && !nav.contains(e.target) && !hamburger.contains(e.target)) {
+        toggleMenu();
+      }
+    });
+
+    // 2. SLUITEN BIJ SCROLLEN
     window.addEventListener('scroll', () => {
       let currentScroll = window.pageYOffset;
+      
+      // Sluit menu als je meer dan 10px scrollt terwijl het open is
+      if (nav.classList.contains('active')) {
+          toggleMenu();
+      }
+
+      // De blur-effecten voor de header balk
       if (currentScroll > 50) {
         headerBar.classList.add('scrolled');
         heroHeader.classList.add('scrolled');
@@ -345,11 +353,9 @@
       }
     });
 
-    // VERBETERDE SMOOTH SCROLL FUNCTIE
     function scrollToSection(id) {
       const element = document.querySelector(id);
       if (element) {
-        // Bereken de positie met een offset van 80px voor de menu-balk
         const offset = 80;
         const bodyRect = document.body.getBoundingClientRect().top;
         const elementRect = element.getBoundingClientRect().top;
@@ -361,7 +367,6 @@
           behavior: 'smooth'
         });
 
-        // Sluit menu op mobiel na klik
         if (nav.classList.contains('active')) toggleMenu();
       }
     }
@@ -370,11 +375,6 @@
       entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
     }, { threshold: 0.1 });
     document.querySelectorAll('.section').forEach(s => observer.observe(s));
-
-    function toggleTheme() {
-      const body = document.body;
-      body.setAttribute('data-theme', body.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
-    }
   </script>
 </body>
 </html>
