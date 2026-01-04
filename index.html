@@ -184,7 +184,7 @@
 <body>
 
   <header id="heroHeader"></header>
-  <div class="hero-spacer"></div>
+  <div class="hero-spacer" id="home"></div>
 
   <div class="header-bar" id="headerBar">
     <div class="hamburger-box" id="hamburgerBtn">
@@ -201,7 +201,7 @@
   </nav>
 
   <main>
-    <section class="section" id="home">
+    <section class="section">
       <h2>Welkom bij lndustriële Schoonmaak</h2>
       <p>Industriële reiniging is werk voor specialisten. lndustriële Schoonmaak zorgt ervoor dat uw medewerkers in een propere – en dus ook veiliger – omgeving aan de slag kunnen. Met meer dan 10 jaar ervaring ben ik uw betrouwbare partner voor industriële schoonmaak in heel België.</p>
       <ul>
@@ -227,21 +227,11 @@
     <section class="section">
       <h2>Auto-ramen professioneel wassen</h2>
       <p>Alleen autoruiten – 100% streeploos en glanzend. Binnen en buiten perfect schoon.</p>
-      <ul>
-        <li>Streepvrij resultaat</li>
-        <li>Speciale glasreiniging</li>
-        <li>Snel en professioneel</li>
-      </ul>
     </section>
 
     <section class="section">
       <h2>Huizenramen professioneel wassen</h2>
       <p>Alleen huizenramen – 100% streeploos en glanzend. Binnen en buiten perfect schoon.</p>
-      <ul>
-        <li>Professioneel op hoogte</li>
-        <li>Streepvrij resultaat</li>
-        <li>Snel en veilig</li>
-      </ul>
     </section>
 
     <section class="section">
@@ -252,7 +242,7 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="boot">
       <h2>Bootreiniging 🛥️</h2>
       <p>Grondige reiniging van rompen, dekken en interieurs van industriële en particuliere vaartuigen.</p>
       <div style="text-align:center; margin:2rem 0;">
@@ -322,7 +312,9 @@
     function scrollToSection(id) {
       const element = document.querySelector(id);
       if (element) {
-        window.scrollTo({ top: element.offsetTop - 80, behavior: 'smooth' });
+        // Een kleine offset van 80px zodat de titel niet onder de menu-balk verdwijnt
+        const offsetTop = element.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({ top: offsetTop, behavior: 'smooth' });
         if (nav.classList.contains('active')) toggleMenu();
       }
     }
