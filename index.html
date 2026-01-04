@@ -44,33 +44,29 @@
       100% { background-position: 0% 50%; }
     }
     
-    /* BACKGROUND FADE EFFECT CONFIG */
     header {
       background: url('achtergrond.jpg') no-repeat center center;
       background-size: cover;
       min-height: 100vh;
       width: 100%;
-      position: fixed; /* Blijft staan tijdens scrollen */
+      position: fixed;
       top: 0;
       left: 0;
-      z-index: -1; /* Achter de tekst */
+      z-index: -1;
       transition: filter 0.8s ease, transform 0.8s ease;
       will-change: filter;
     }
 
-    /* Deze klasse wordt door Javascript geactiveerd bij scrollen */
     header.blurred {
-      filter: blur(8px) brightness(0.7);
-      transform: scale(1.05); /* Subtiele zoom voor diepte */
+      filter: blur(10px) brightness(0.7);
+      transform: scale(1.05);
     }
 
-    /* Ruimte maken zodat de content niet over de foto begint */
     .hero-spacer {
       height: 100vh;
       pointer-events: none;
     }
 
-    /* GLASSY HAMBURGER CONTAINER */
     .header-bar {
       position: fixed; top: 1rem; left: 1rem; right: 1rem;
       display: flex; justify-content: flex-end; align-items: center;
@@ -94,7 +90,6 @@
     .hamburger span:nth-child(2) { top: 10px; }
     .hamburger span:nth-child(3) { top: 20px; }
 
-    /* MENU STYLE */
     .nav {
       display: none; position: fixed; top: 80px; right: 15px; width: 180px;
       background: var(--glass-bg-light); backdrop-filter: blur(20px);
@@ -123,10 +118,7 @@
     ul li { margin: 1rem 0; padding-left: 2.5rem; position: relative; color: var(--text-dark); }
     ul li::before { content: "✔"; color: var(--primary); position: absolute; left: 0; font-weight: bold; }
 
-    /* ANIMATED CONTACT FORM */
-    .contact-form {
-      display: flex; flex-direction: column; gap: 1.5rem; position: relative;
-    }
+    .contact-form { display: flex; flex-direction: column; gap: 1.5rem; position: relative; }
     .input-group { position: relative; overflow: hidden; border-radius: 12px; }
     
     input, textarea {
@@ -139,7 +131,6 @@
       color: #333; outline: none; transition: 0.3s;
     }
 
-    /* SHIMMER EFFECT (BLINKEND) */
     .shimmer-bg::after {
       content: ""; position: absolute; top: -50%; left: -50%;
       width: 200%; height: 200%;
@@ -167,10 +158,20 @@
     }
     .btn:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
 
-    footer { text-align: center; padding: 3rem 1rem; color: var(--text-dark); position: relative; z-index: 1; }
+    footer { 
+      text-align: center; padding: 3rem 1rem; color: var(--text-dark); position: relative; z-index: 1; 
+    }
+    .footer-box {
+      background: var(--glass-bg-light);
+      backdrop-filter: blur(15px);
+      padding: 1.5rem;
+      border-radius: 18px;
+      display: inline-block;
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow);
+    }
 
     @media (min-width: 768px) {
-      .header-bar { display: flex; }
       .nav {
         display: flex; position: fixed; top: 2rem; right: 2rem; width: auto; 
         background: transparent; border: none; opacity: 1; transform: none;
@@ -183,7 +184,6 @@
 <body>
 
   <header id="heroHeader"></header>
-
   <div class="hero-spacer"></div>
 
   <div class="header-bar" id="headerBar">
@@ -227,11 +227,37 @@
     <section class="section">
       <h2>Auto-ramen professioneel wassen</h2>
       <p>Alleen autoruiten – 100% streeploos en glanzend. Binnen en buiten perfect schoon.</p>
+      <ul>
+        <li>Streepvrij resultaat</li>
+        <li>Speciale glasreiniging</li>
+        <li>Snel en professioneel</li>
+      </ul>
     </section>
 
     <section class="section">
       <h2>Huizenramen professioneel wassen</h2>
       <p>Alleen huizenramen – 100% streeploos en glanzend. Binnen en buiten perfect schoon.</p>
+      <ul>
+        <li>Professioneel op hoogte</li>
+        <li>Streepvrij resultaat</li>
+        <li>Snel en veilig</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Reiniging op hoogte</h2>
+      <p>Veilig en efficiënt reinigen op moeilijk bereikbare plaatsen met gebruik van hoogwerkers.</p>
+      <div style="text-align:center; margin:2rem 0;">
+        <img src="Hoogtewerk.jpg" alt="Hoogte" style="max-width:100%; border-radius:15px;">
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Bootreiniging 🛥️</h2>
+      <p>Grondige reiniging van rompen, dekken en interieurs van industriële en particuliere vaartuigen.</p>
+      <div style="text-align:center; margin:2rem 0;">
+        <img src="Boot.jpg" alt="Boot" style="max-width:100%; border-radius:15px;">
+      </div>
     </section>
 
     <section class="section" id="contact">
@@ -259,7 +285,9 @@
   </main>
 
   <footer>
-    © 2025 lndustriële Schoonmaak – Zelfstandig & betrouwbaar
+    <div class="footer-box">
+      © 2025 lndustriële Schoonmaak – Zelfstandig & betrouwbaar
+    </div>
   </footer>
 
   <script>
@@ -284,8 +312,6 @@
 
     window.addEventListener('scroll', () => {
       if (nav.classList.contains('active')) toggleMenu();
-
-      // Achtergrond blurren bij scrollen
       if (window.pageYOffset > 50) {
         heroHeader.classList.add('blurred');
       } else {
