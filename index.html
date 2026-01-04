@@ -67,20 +67,14 @@
     header {
       background: url('achtergrond.jpg') no-repeat center center;
       background-size: cover;
-      /* Fixed weggehaald voor iPhone support */
       min-height: 100vh;
       position: relative;
       transition: filter 0.5s ease;
     }
-    /* Alleen op grote schermen het 'fixed' effect gebruiken */
     @media (min-width: 1025px) {
-      header {
-        background-attachment: fixed;
-      }
+      header { background-attachment: fixed; }
     }
-    header.scrolled {
-      filter: blur(10px);
-    }
+    header.scrolled { filter: blur(10px); }
     .header-bar {
       position: fixed;
       top: 1rem;
@@ -102,15 +96,8 @@
       border: 1px solid var(--glass-border);
       box-shadow: var(--shadow);
     }
-    [data-theme="dark"] .header-bar.scrolled {
-      background: rgba(40, 40, 40, 0.9);
-    }
-    .hamburger {
-      width: 36px;
-      height: 28px;
-      cursor: pointer;
-      position: relative;
-    }
+    [data-theme="dark"] .header-bar.scrolled { background: rgba(40, 40, 40, 0.9); }
+    .hamburger { width: 36px; height: 28px; cursor: pointer; position: relative; }
     .hamburger span {
       position: absolute;
       left: 0;
@@ -120,15 +107,14 @@
       border-radius: 2px;
       transition: all 0.3s ease;
     }
-    .header-bar.scrolled span {
-      background: var(--text-dark);
-    }
+    .header-bar.scrolled span { background: var(--text-dark); }
     .hamburger span:nth-child(1) { top: 0; }
     .hamburger span:nth-child(2) { top: 12px; }
     .hamburger span:nth-child(3) { top: 24px; }
     .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(7px, 7px); }
     .hamburger.active span:nth-child(2) { opacity: 0; }
     .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+    
     .nav {
       display: none;
       position: fixed;
@@ -137,94 +123,49 @@
       width: 170px;
       background: var(--glass-bg-light);
       backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--glass-border);
       border-radius: 18px;
       box-shadow: var(--shadow);
-      opacity: 0;
-      transform: translateY(-30px) scale(0.95);
-      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
       z-index: 99999;
       padding: 0.8rem 0;
-      overflow: hidden;
       text-align: center;
     }
-    [data-theme="dark"] .nav {
-      background: var(--glass-bg-dark);
-    }
-    .nav.active {
-      display: block;
-      transform: translateY(0) scale(1);
-      opacity: 1;
-    }
-    .nav a {
-      display: block;
-      color: var(--text-dark);
-      text-decoration: none;
-      padding: 1rem 0;
-      font-size: 1rem;
-      font-weight: 500;
-      border-bottom: 1px solid rgba(200,200,200,0.15);
-      transition: all 0.3s ease;
-    }
-    .nav a:hover {
-      background: rgba(255,255,255,0.2);
-      color: var(--primary);
-    }
-    .theme-switch {
-      padding: 0.8rem 0;
-      font-size: 0.9rem;
-    }
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.4);
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.4s ease;
-      z-index: 99998;
-    }
-    .overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
+    .nav.active { display: block; }
+    .nav a { display: block; color: var(--text-dark); text-decoration: none; padding: 1rem 0; font-weight: 500; }
+
+    /* --- CENTREREN VAN DE CONTENT --- */
     main {
-      padding: 0 1.5rem;
+      padding: 0 1rem; /* Kleine padding aan de zijkanten op mobiel */
       position: relative;
       z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Zorgt dat alles horizontaal in het midden staat */
+      width: 100%;
     }
     .section {
       background: var(--glass-bg-light);
       backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
       border-radius: 24px;
-      padding: 3rem 2rem;
-      margin: 2.5rem 0;
+      padding: 2.5rem 1.5rem;
+      margin: 2rem 0;
       box-shadow: var(--shadow);
       border: 1px solid var(--glass-border);
       opacity: 0;
       transform: translateY(50px);
       transition: opacity 1s ease-out, transform 1s ease-out;
+      
+      width: 100%;
+      max-width: 800px; /* Beperkt de breedte op desktop voor leesbaarheid */
     }
-    [data-theme="dark"] .section {
-      background: var(--glass-bg-dark);
-    }
-    .section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    h2 {
-      color: var(--primary);
-      text-align: center;
-      margin-bottom: 1.5rem;
-      font-size: 2.2rem;
-    }
+    /* -------------------------------- */
+
+    [data-theme="dark"] .section { background: var(--glass-bg-dark); }
+    .section.visible { opacity: 1; transform: translateY(0); }
+    h2 { color: var(--primary); text-align: center; margin-bottom: 1.5rem; font-size: 2rem; }
     ul { list-style: none; }
-    ul li { margin: 1rem 0; padding-left: 2.5rem; position: relative; font-size: 1.1rem; }
-    ul li::before { content: "✔"; color: var(--primary); position: absolute; left: 0; font-size: 1.5rem; top: -2px; }
+    ul li { margin: 1rem 0; padding-left: 2.5rem; position: relative; font-size: 1rem; }
+    ul li::before { content: "✔"; color: var(--primary); position: absolute; left: 0; font-size: 1.3rem; top: -2px; }
     .btn {
       display: block;
       background: var(--primary);
@@ -232,69 +173,44 @@
       padding: 1.2rem;
       border-radius: 50px;
       text-align: center;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       font-weight: 600;
       text-decoration: none;
       margin: 2rem auto;
-      max-width: 300px;
+      max-width: 280px;
       transition: all 0.4s;
     }
-    form { display: flex; flex-direction: column; gap: 1.5rem; }
+    form { display: flex; flex-direction: column; gap: 1.2rem; width: 100%; }
     input, textarea {
-      padding: 1.2rem;
+      padding: 1rem;
       border: 1px solid var(--glass-border);
       border-radius: 12px;
       background: rgba(255,255,255,0.9);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
       font-size: 1rem;
       color: var(--text-dark);
-      transition: all 0.3s ease;
       outline: none;
+      width: 100%;
     }
-    [data-theme="dark"] input, [data-theme="dark"] textarea {
-      background: rgba(50,50,50,0.9);
-      color: var(--text-light);
-    }
+    [data-theme="dark"] input, [data-theme="dark"] textarea { background: rgba(50,50,50,0.9); color: var(--text-light); }
     footer {
       text-align: center;
-      padding: 4rem 1rem 2rem;
+      padding: 3rem 1rem;
       background: var(--glass-bg-light);
       backdrop-filter: blur(15px);
       color: var(--text-dark);
-      position: relative;
-      z-index: 1;
       border-top: 1px solid var(--glass-border);
     }
-    [data-theme="dark"] footer {
-      background: var(--glass-bg-dark);
-    }
+    [data-theme="dark"] footer { background: var(--glass-bg-dark); }
+
     @media (min-width: 768px) {
       .hamburger { display: none; }
       .nav {
-        display: flex;
-        flex-direction: row;
-        position: fixed;
-        top: 2rem;
-        right: 2rem;
-        background: transparent;
-        box-shadow: none;
-        transform: none;
-        opacity: 1;
-        padding: 0;
-        width: auto;
-        border: none;
+        display: flex; position: fixed; top: 2rem; right: 2rem; width: auto; 
+        background: transparent; box-shadow: none; border: none; padding: 0;
       }
-      .nav a {
-        padding: 0 1.5rem;
-        color: var(--text-light);
-      }
-      .header-bar {
-        top: 2rem;
-        left: 2rem;
-        right: 2rem;
-        padding: 0.8rem 1.5rem;
-      }
+      .nav a { padding: 0 1.5rem; color: var(--text-light); }
+      .header-bar { top: 2rem; left: 2rem; right: 2rem; }
+      h2 { font-size: 2.5rem; }
     }
   </style>
 </head>
@@ -303,22 +219,13 @@
   <header id="heroHeader">
     <div class="header-bar" id="headerBar">
       <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </div>
     </div>
     <nav class="nav" id="navMenu">
       <a href="#home" onclick="scrollToSection('#home')">Home</a>
       <a href="#diensten" onclick="scrollToSection('#diensten')">Diensten</a>
       <a href="#contact" onclick="scrollToSection('#contact')">Contact</a>
-      <div class="theme-switch">
-        <label>Dark Mode</label>
-        <label class="switch">
-          <input type="checkbox" id="themeCheckbox" onchange="toggleTheme()">
-          <span class="slider"></span>
-        </label>
-      </div>
     </nav>
     <div class="overlay" id="overlay"></div>
   </header>
@@ -375,54 +282,30 @@
         <li>Gevelreiniging op hoogte</li>
         <li>Ramen en glas op hoogte</li>
         <li>Dakgoten en zonnepanelen</li>
-        <li>Veiligheid altijd prioriteit</li>
       </ul>
-
-      <div style="text-align:center; margin:2.5rem 0;">
-        <img src="Hoogtewerk.jpg" alt="Reiniging op hoogte voorbeeld" style="max-width:100%; height:auto; border-radius:24px; box-shadow:var(--shadow); border:1px solid var(--glass-border);">
+      <div style="text-align:center; margin:2rem 0;">
+        <img src="Hoogtewerk.jpg" alt="Hoogte" style="max-width:100%; height:auto; border-radius:15px;">
       </div>
     </section>
 
     <section class="section">
       <h2>Bootreiniging 🛥️</h2>
       <p>Professionele reiniging van boten, jachten en schepen – exterieur en interieur.</p>
-      <ul>
-        <li>Rompen, dekken en ramen</li>
-        <li>Interieur schoon en fris</li>
-        <li>Streepvrij en glanzend</li>
-      </ul>
-
-      <div style="text-align:center; margin:2.5rem 0;">
-        <img src="Boot.jpg" alt="Bootreiniging voorbeeld" style="max-width:100%; height:auto; border-radius:24px; box-shadow:var(--shadow); border:1px solid var(--glass-border);">
+      <div style="text-align:center; margin:2rem 0;">
+        <img src="Boot.jpg" alt="Boot" style="max-width:100%; height:auto; border-radius:15px;">
       </div>
-    </section>
-
-    <section class="section">
-      <h2>Onze aanpak</h2>
-      <p>Via frequente opleidingen en een nauwgezette opvolging ben ik steeds op de hoogte van de nieuwste technieken. Na een grondige kennismaking met uw bedrijf bied ik een oplossing op maat.</p>
-    </section>
-
-    <section class="section">
-      <h2>Certificering</h2>
-      <p>lndustriële Schoonmaak is VCA-gecertificeerd. Dit betekent dat ik werk volgens de strengste normen voor veiligheid, gezondheid en milieu.</p>
-    </section>
-
-    <section class="section">
-      <h2>Corona-proof schoonmaken</h2>
-      <p>Sinds de uitbraak van Covid-19 heeft schoonmaak een extra dimensie gekregen. Ik zorg voor virusvrije en veilige ruimtes met extra aandacht voor contactpunten zoals schakelaars, hendels en klinken. Indien nodig plan ik een grondige desinfectie.</p>
     </section>
 
     <section class="section" id="contact">
-      <h2 class="contact-title">Contacteer mij</h2>
-      <div style="text-align:center; margin:2rem 0;">
-        <a href="mailto:info@lndustriëleSchoonmaak.be" class="contact-info" style="font-size:1.4rem; text-decoration:none;">✉️ info@lndustriëleSchoonmaak.be</a>
+      <h2>Contacteer mij</h2>
+      <div style="text-align:center; margin-bottom: 2rem;">
+        <a href="mailto:info@lndustriëleSchoonmaak.be" style="text-decoration:none; color:var(--primary); font-weight:600;">✉️ info@lndustriëleSchoonmaak.be</a>
       </div>
-
       <form action="https://formspree.io/f/xjgvbkan" method="POST">
         <input type="text" name="naam" placeholder="Je naam *" required>
         <input type="tel" name="telefoon" placeholder="Telefoonnummer *" required>
         <input type="email" name="email" placeholder="E-mailadres *" required>
-        <textarea name="bericht" rows="5" placeholder="Je vraag of bericht..." required></textarea>
+        <textarea name="bericht" rows="5" placeholder="Je bericht..." required></textarea>
         <button type="submit" class="btn">Verstuur aanvraag</button>
       </form>
     </section>
@@ -434,8 +317,7 @@
   </footer>
 
   <script>
-    // Hamburger menu
-    const hamburger = document.querySelector('.hamburger');
+    const hamburger = document.getElementById('hamburger');
     const nav = document.getElementById('navMenu');
     const overlay = document.getElementById('overlay');
     const headerBar = document.getElementById('headerBar');
@@ -450,10 +332,8 @@
     hamburger.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', toggleMenu);
 
-    // Scroll effecten
     window.addEventListener('scroll', () => {
-      let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-
+      let currentScroll = window.pageYOffset;
       if (currentScroll > 50) {
         headerBar.classList.add('scrolled');
         heroHeader.classList.add('scrolled');
@@ -463,33 +343,23 @@
       }
     });
 
-    // Smooth scroll
     function scrollToSection(id) {
       const element = document.querySelector(id);
       if (element) {
-        window.scrollTo({
-          top: element.offsetTop - 80,
-          behavior: 'smooth'
-        });
+        window.scrollTo({ top: element.offsetTop - 80, behavior: 'smooth' });
         if (nav.classList.contains('active')) toggleMenu();
       }
     }
 
-    // Secties fade-in
     const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
     }, { threshold: 0.1 });
-
     document.querySelectorAll('.section').forEach(s => observer.observe(s));
 
-    // Theme toggle
     function toggleTheme() {
       const body = document.body;
       body.setAttribute('data-theme', body.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
     }
   </script>
-
 </body>
 </html>
