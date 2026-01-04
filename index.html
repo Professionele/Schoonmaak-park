@@ -505,6 +505,17 @@
     hamburger.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', toggleMenu);
 
+    // Close menu on scroll (with animation)
+    let lastScrollTop = 0;
+    window.addEventListener('scroll', () => {
+      let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      if (currentScroll > lastScrollTop && nav.classList.contains('active')) {
+        // Scrolling down and menu open → close with animation
+        toggleMenu();
+      }
+      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
+    });
+
     // Smooth scroll
     function scrollToSection(id) {
       const element = document.querySelector(id);
@@ -597,4 +608,4 @@
   </script>
 
 </body>
-          </html>
+</html>
