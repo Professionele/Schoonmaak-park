@@ -26,8 +26,8 @@
       --primary-light: #888888;
       --text-dark: #333333;
       --text-light: #ffffff;
-      --bg-light: #f8f8f8;
-      --bg-dark: #1e1e1e;
+      --bg-light: #f0f0f0;
+      --bg-dark: #1a1a1a;
       --glass-bg: #ffffff;
       --glass-border: rgba(200, 200, 200, 0.5);
       --shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
@@ -40,7 +40,7 @@
       --glass-bg: #2a2a2a;
       --glass-border: rgba(100, 100, 100, 0.5);
       --shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-      --bg-light: #1e1e1e;
+      --bg-light: #1a1a1a;
       --bg-dark: #000000;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -50,11 +50,24 @@
       line-height: 1.6;
       min-height: 100vh;
       background: var(--bg-light);
+      background-size: 300% 300%;
+      animation: glanzend 25s ease infinite;
       position: relative;
       overflow-x: hidden;
     }
     [data-theme="dark"] body {
       background: var(--bg-dark);
+      animation: glanzend-dark 25s ease infinite;
+    }
+    @keyframes glanzend {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes glanzend-dark {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
     header {
       background: url('achtergrond.jpg') no-repeat center center;
@@ -120,7 +133,7 @@
       position: fixed;
       top: 80px;
       right: 20px;
-      width: 180px;
+      width: 200px;
       background: var(--glass-bg);
       border: 1px solid var(--glass-border);
       border-radius: 20px;
@@ -131,6 +144,7 @@
       z-index: 99999;
       padding: 1rem 0;
       overflow: hidden;
+      text-align: center; /* Center alles in menu */
     }
     .nav.active {
       display: block;
@@ -141,19 +155,23 @@
       display: block;
       color: var(--text-dark);
       text-decoration: none;
-      padding: 1rem 1.5rem;
-      font-size: 1rem;
+      padding: 1.2rem 0; /* Gelijke padding, geen links verschuiving */
+      font-size: 1.1rem;
+      font-weight: 500;
       border-bottom: 1px solid rgba(200,200,200,0.2);
       transition: all 0.3s ease;
       cursor: pointer;
     }
     .nav a:hover {
-      background: rgba(240,240,240,0.5);
+      background: rgba(240,240,240,0.4);
       color: var(--primary);
-      padding-left: 2rem;
     }
     [data-theme="dark"] .nav a:hover {
-      background: rgba(70,70,70,0.5);
+      background: rgba(70,70,70,0.4);
+    }
+    .theme-switch {
+      padding: 1rem 0;
+      font-size: 0.95rem;
     }
     .overlay {
       position: fixed;
