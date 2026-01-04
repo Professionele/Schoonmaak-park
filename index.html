@@ -10,9 +10,6 @@
   <meta property="og:image" content="https://raw.githubusercontent.com/Professionele/Schoonmaak/main/logo.jpg" />
   <meta property="og:url" content="https://professionele.github.io/Schoonmaak/" />
   <meta property="og:type" content="website" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="lndustriële Schoonmaak Logo - Professionele Industriële Reiniging" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,10 +28,6 @@
       --glass-border: rgba(255, 255, 255, 0.3);
       --shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
     }
-    [data-theme="dark"] {
-      --primary: #aaaaaa;
-      --text-dark: #eeeeee;
-    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Poppins', sans-serif;
@@ -50,47 +43,50 @@
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
+    
     header {
       background: url('achtergrond.jpg') no-repeat center center;
       background-size: cover;
       min-height: 100vh;
       position: relative;
-      transition: filter 0.5s ease;
     }
+
+    /* GLASSY HAMBURGER CONTAINER */
     .header-bar {
       position: fixed; top: 1rem; left: 1rem; right: 1rem;
       display: flex; justify-content: flex-end; align-items: center;
       z-index: 1001; transition: 0.4s ease;
     }
-    .header-bar.scrolled {
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(20px);
-      border-radius: 16px;
-      padding: 0.6rem 1rem;
-      box-shadow: var(--shadow);
+    .hamburger-box {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      padding: 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      cursor: pointer;
     }
-    .hamburger { width: 36px; height: 28px; cursor: pointer; position: relative; }
+    .hamburger { width: 30px; height: 22px; position: relative; }
     .hamburger span {
       position: absolute; left: 0; width: 100%; height: 3px;
-      background: var(--text-dark); border-radius: 2px; transition: 0.3s;
+      background: white; border-radius: 2px; transition: 0.3s;
     }
     .hamburger span:nth-child(1) { top: 0; }
-    .hamburger span:nth-child(2) { top: 12px; }
-    .hamburger span:nth-child(3) { top: 24px; }
-    
+    .hamburger span:nth-child(2) { top: 10px; }
+    .hamburger span:nth-child(3) { top: 20px; }
+
+    /* MENU STYLE */
     .nav {
-      display: none; position: fixed; top: 70px; right: 15px; width: 170px;
+      display: none; position: fixed; top: 80px; right: 15px; width: 180px;
       background: var(--glass-bg-light); backdrop-filter: blur(20px);
       border: 1px solid var(--glass-border); border-radius: 18px;
       z-index: 99999; padding: 0.8rem 0; text-align: center;
       opacity: 0; transition: 0.3s ease; transform: translateY(-10px);
     }
     .nav.active { display: block; opacity: 1; transform: translateY(0); }
-    .nav a { display: block; color: var(--text-dark); text-decoration: none; padding: 1rem 0; font-weight: 500; }
+    .nav a { display: block; color: var(--text-dark); text-decoration: none; padding: 1rem 0; font-weight: 600; }
 
-    main {
-      padding: 0 1rem; display: flex; flex-direction: column; align-items: center; width: 100%;
-    }
+    main { padding: 0 1rem; display: flex; flex-direction: column; align-items: center; width: 100%; }
     .section {
       background: var(--glass-bg-light);
       backdrop-filter: blur(15px);
@@ -105,35 +101,63 @@
     .section.visible { opacity: 1; transform: translateY(0); }
     h2 { color: var(--primary); text-align: center; margin-bottom: 1.5rem; font-size: 2rem; font-weight: 700; }
     ul { list-style: none; }
-    ul li { 
-      margin: 1rem 0; padding-left: 2.5rem; position: relative; 
-      font-size: 1rem; color: var(--text-dark); 
+    ul li { margin: 1rem 0; padding-left: 2.5rem; position: relative; color: var(--text-dark); }
+    ul li::before { content: "✔"; color: var(--primary); position: absolute; left: 0; font-weight: bold; }
+
+    /* ANIMATED CONTACT FORM */
+    .contact-form {
+      display: flex; flex-direction: column; gap: 1.5rem; position: relative;
     }
-    ul li::before { 
-      content: "✔"; color: var(--primary); position: absolute; 
-      left: 0; font-size: 1.3rem; font-weight: bold;
-    }
+    .input-group { position: relative; overflow: hidden; border-radius: 12px; }
     
+    input, textarea {
+      width: 100%; padding: 1.2rem;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 12px;
+      font-size: 1rem; font-family: inherit;
+      color: #333; outline: none; transition: 0.3s;
+    }
+
+    /* SHIMMER EFFECT (BLINKEND) */
+    .shimmer-bg::after {
+      content: ""; position: absolute; top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: linear-gradient(to bottom right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+      transform: rotate(30deg);
+      animation: shimmer 4s infinite linear;
+      pointer-events: none;
+    }
+    @keyframes shimmer {
+      0% { transform: translate(-100%, -100%) rotate(30deg); }
+      100% { transform: translate(100%, 100%) rotate(30deg); }
+    }
+
+    input:focus, textarea:focus {
+      background: rgba(255, 255, 255, 0.7);
+      border-color: var(--primary);
+      box-shadow: 0 0 15px rgba(255,255,255,0.8);
+    }
+
     .btn {
       display: block; background: var(--primary); color: white;
       padding: 1.2rem; border-radius: 50px; text-align: center;
-      font-weight: 600; text-decoration: none; margin: 2rem auto; max-width: 280px;
+      font-weight: 600; text-decoration: none; margin-top: 1rem;
+      border: none; cursor: pointer; transition: 0.4s;
     }
-    form { display: flex; flex-direction: column; gap: 1.2rem; }
-    input, textarea {
-      padding: 1rem; border-radius: 12px; border: 1px solid var(--glass-border);
-      background: rgba(255,255,255,0.9); font-size: 1rem;
-    }
+    .btn:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
 
     footer { text-align: center; padding: 3rem 1rem; color: var(--text-dark); }
 
     @media (min-width: 768px) {
-      .hamburger { display: none; }
+      .header-bar { display: flex; }
       .nav {
         display: flex; position: fixed; top: 2rem; right: 2rem; width: auto; 
         background: transparent; border: none; opacity: 1; transform: none;
       }
-      .nav a { padding: 0 1.5rem; color: var(--text-dark); }
+      .nav a { padding: 0 1.5rem; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+      .hamburger-box { display: none; }
     }
   </style>
 </head>
@@ -141,16 +165,17 @@
 
   <header id="heroHeader">
     <div class="header-bar" id="headerBar">
-      <div class="hamburger" id="hamburger">
-        <span></span><span></span><span></span>
+      <div class="hamburger-box" id="hamburgerBtn">
+        <div class="hamburger">
+          <span></span><span></span><span></span>
+        </div>
       </div>
     </div>
     <nav class="nav" id="navMenu">
-      <a href="#home" onclick="scrollToSection('#home'); return false;">Home</a>
-      <a href="#diensten" onclick="scrollToSection('#diensten'); return false;">Diensten</a>
-      <a href="#contact" onclick="scrollToSection('#contact'); return false;">Contact</a>
+      <a href="#home">Home</a>
+      <a href="#diensten">Diensten</a>
+      <a href="#contact">Contact</a>
     </nav>
-    <div id="overlay" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.3); display:none; z-index:999;"></div>
   </header>
 
   <main>
@@ -175,55 +200,37 @@
         <li>Reiniging op hoogte</li>
         <li>Ventilatie- en machine-reiniging</li>
       </ul>
-      <p style="text-align:center;">Vraag gerust een vrijblijvende offerte aan!</p>
     </section>
 
     <section class="section">
       <h2>Auto-ramen professioneel wassen</h2>
       <p>Alleen autoruiten – 100% streeploos en glanzend. Binnen en buiten perfect schoon.</p>
-      <ul>
-        <li>Streepvrij resultaat</li>
-        <li>Speciale glasreiniging</li>
-        <li>Snel en professioneel</li>
-      </ul>
     </section>
 
     <section class="section">
       <h2>Huizenramen professioneel wassen</h2>
       <p>Alleen huizenramen – 100% streeploos en glanzend. Binnen en buiten perfect schoon.</p>
-      <ul>
-        <li>Professioneel op hoogte</li>
-        <li>Streepvrij resultaat</li>
-        <li>Snel en veilig</li>
-      </ul>
-    </section>
-
-    <section class="section">
-      <h2>Reiniging op hoogte</h2>
-      <p>Veilig en efficiënt reinigen op moeilijk bereikbare plaatsen met gebruik van hoogwerkers.</p>
-      <div style="text-align:center; margin:2rem 0;">
-        <img src="Hoogtewerk.jpg" alt="Hoogte" style="max-width:100%; border-radius:15px;">
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>Bootreiniging 🛥️</h2>
-      <p>Grondige reiniging van rompen, dekken en interieurs van industriële en particuliere vaartuigen.</p>
-      <div style="text-align:center; margin:2rem 0;">
-        <img src="Boot.jpg" alt="Boot" style="max-width:100%; border-radius:15px;">
-      </div>
     </section>
 
     <section class="section" id="contact">
       <h2>Contacteer mij</h2>
       <div style="text-align:center; margin-bottom: 2rem;">
-        <a href="mailto:info@lndustriëleSchoonmaak.be" style="text-decoration:none; color:var(--primary); font-weight:600;">✉️ info@lndustriëleSchoonmaak.be</a>
+        <a href="mailto:info@lndustriëleSchoonmaak.be" style="text-decoration:none; color:var(--primary); font-weight:700;">✉️ info@lndustriëleSchoonmaak.be</a>
       </div>
-      <form action="https://formspree.io/f/xjgvbkan" method="POST">
-        <input type="text" name="naam" placeholder="Je naam *" required>
-        <input type="tel" name="telefoon" placeholder="Telefoonnummer *" required>
-        <input type="email" name="email" placeholder="E-mailadres *" required>
-        <textarea name="bericht" rows="5" placeholder="Je bericht..." required></textarea>
+      
+      <form class="contact-form" action="https://formspree.io/f/xjgvbkan" method="POST">
+        <div class="input-group shimmer-bg">
+          <input type="text" name="naam" placeholder="Je naam *" required>
+        </div>
+        <div class="input-group shimmer-bg">
+          <input type="tel" name="telefoon" placeholder="Telefoonnummer *" required>
+        </div>
+        <div class="input-group shimmer-bg">
+          <input type="email" name="email" placeholder="E-mailadres *" required>
+        </div>
+        <div class="input-group shimmer-bg">
+          <textarea name="bericht" rows="5" placeholder="Je bericht..." required></textarea>
+        </div>
         <button type="submit" class="btn">Verstuur aanvraag</button>
       </form>
     </section>
@@ -234,30 +241,26 @@
   </footer>
 
   <script>
-    const hamburger = document.getElementById('hamburger');
+    const hbBtn = document.getElementById('hamburgerBtn');
     const nav = document.getElementById('navMenu');
-    const headerBar = document.getElementById('headerBar');
 
     function toggleMenu() {
-      hamburger.classList.toggle('active');
       nav.classList.toggle('active');
     }
 
-    hamburger.addEventListener('click', (e) => {
+    hbBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       toggleMenu();
     });
 
     document.addEventListener('click', (e) => {
-      if (nav.classList.contains('active') && !nav.contains(e.target) && !hamburger.contains(e.target)) {
+      if (nav.classList.contains('active') && !nav.contains(e.target) && !hbBtn.contains(e.target)) {
         toggleMenu();
       }
     });
 
     window.addEventListener('scroll', () => {
       if (nav.classList.contains('active')) toggleMenu();
-      if (window.pageYOffset > 50) headerBar.classList.add('scrolled');
-      else headerBar.classList.remove('scrolled');
     });
 
     function scrollToSection(id) {
@@ -267,6 +270,14 @@
         if (nav.classList.contains('active')) toggleMenu();
       }
     }
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('.nav a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        scrollToSection(this.getAttribute('href'));
+      });
+    });
 
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
